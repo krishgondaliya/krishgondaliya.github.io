@@ -1,0 +1,358 @@
+:root {
+  color-scheme: light;
+  --bg: #F4F3EE;
+  --panel: #E7DED1;
+  --text: #211B16;
+  --muted: #5E554B;
+  --soft: #8C7B6B;
+  --line: #D8CCBD;
+  --accent: #C96442;
+  --accent-strong: #9E452B;
+  --header-overlay: rgba(33, 27, 22, .18);
+  --toggle-bg: rgba(33, 27, 22, .28);
+  --toggle-bg-hover: rgba(33, 27, 22, .46);
+}
+
+:root.dark {
+  color-scheme: dark;
+  --bg: #0c1222;
+  --panel: #1C2333;
+  --text: #F7F0E7;
+  --muted: #D7CABB;
+  --soft: #A9998A;
+  --line: #384154;
+  --accent: #F08A68;
+  --accent-strong: #FFB099;
+  --header-overlay: rgba(12, 18, 34, .3);
+  --toggle-bg: rgba(12, 18, 34, .48);
+  --toggle-bg-hover: rgba(12, 18, 34, .72);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.55;
+}
+
+.theme-toggle {
+  display: inline-grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border: 0;
+  border-radius: .35rem;
+  background: var(--toggle-bg);
+  color: #f1f5f9;
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease, transform .2s ease;
+}
+
+.theme-toggle:hover {
+  background: var(--toggle-bg-hover);
+  color: var(--accent-strong);
+  transform: translateY(-1px);
+}
+
+.theme-toggle svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.theme-toggle .moon-icon,
+.dark .theme-toggle .sun-icon {
+  display: none;
+}
+
+.dark .theme-toggle .moon-icon {
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.shell {
+  width: min(100%, 64rem);
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.site-header {
+  height: 13rem;
+  background-image: linear-gradient(var(--header-overlay), var(--header-overlay)), url("/static/images/archer-banner.jpeg");
+  background-position: center;
+  background-size: cover;
+}
+
+.header-inner {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 1rem;
+  padding-bottom: .25rem;
+}
+
+.brand {
+  width: fit-content;
+  color: #fff8ef;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 1.875rem;
+  font-weight: 800;
+}
+
+.brand:hover,
+.nav a:hover,
+.footer a:hover,
+.all-posts a:hover {
+  color: var(--accent-strong);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1.5rem;
+  color: #fff8ef;
+  font-size: 1.25rem;
+  font-weight: 650;
+}
+
+.nav a.active {
+  color: var(--accent);
+}
+
+.page {
+  display: flex;
+  min-height: calc(100vh - 13rem);
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+main {
+  padding-top: 1.5rem;
+}
+
+.tagline {
+  margin: 0 0 1rem;
+  padding: 1rem;
+  color: var(--muted);
+  font-size: 1.125rem;
+}
+
+.post-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.post-link {
+  display: grid;
+  grid-template-columns: minmax(9rem, 1fr) 3fr;
+  gap: 1.5rem;
+  padding: 1.5rem 1rem;
+  border-radius: .75rem;
+  transition: background .2s ease, transform .2s ease;
+}
+
+.post-link:hover {
+  background: var(--panel);
+  transform: scale(1.01);
+}
+
+time {
+  color: var(--muted);
+  font-weight: 550;
+}
+
+.post-link strong {
+  display: block;
+  font-size: 1.5rem;
+  line-height: 1.35;
+}
+
+.tags {
+  display: block;
+  margin-top: .25rem;
+  color: var(--accent);
+  font-weight: 650;
+  word-spacing: .5rem;
+}
+
+.summary {
+  display: block;
+  margin-top: .35rem;
+  color: var(--muted);
+}
+
+.all-posts {
+  display: flex;
+  justify-content: flex-end;
+  margin: 1rem 0 0;
+  font-size: 1.25rem;
+  font-weight: 650;
+  color: var(--accent);
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  gap: .5rem;
+  margin-top: 4rem;
+  padding-bottom: .5rem;
+  color: var(--muted);
+}
+
+.page-title {
+  margin: 0;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: clamp(2.5rem, 7vw, 3.75rem);
+  line-height: 1.1;
+}
+
+.content-band {
+  border-bottom: 1px solid var(--line);
+}
+
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 0;
+  padding: 2rem 0;
+}
+
+.tag-pill {
+  display: inline-flex;
+  gap: .25rem;
+  align-items: baseline;
+  color: var(--accent);
+  font-size: 1.35rem;
+  font-weight: 750;
+}
+
+.tag-pill span {
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: 14rem 1fr;
+  gap: 2rem;
+  padding-top: 2rem;
+}
+
+.side-tags {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.side-tags a {
+  display: inline-block;
+  margin-bottom: .65rem;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.section-heading {
+  margin: 0 0 1rem;
+  font-size: 1.25rem;
+}
+
+.snippet-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+.snippet-card {
+  display: block;
+  min-height: 8rem;
+  border: 1px solid var(--line);
+  border-radius: .5rem;
+  padding: .75rem;
+  transition: border-color .2s ease, background .2s ease, transform .2s ease;
+}
+
+.snippet-card:hover {
+  border-color: var(--accent);
+  background: var(--panel);
+  transform: scale(1.02);
+}
+
+.snippet-card h2 {
+  margin: 0 0 .5rem;
+  font-size: 1.125rem;
+}
+
+.snippet-card p,
+.about-copy p,
+.about-copy blockquote {
+  color: var(--muted);
+}
+
+.about-layout {
+  display: grid;
+  grid-template-columns: 12rem 1fr;
+  gap: 2rem;
+  align-items: start;
+  padding: 2rem 0;
+}
+
+.avatar {
+  width: 12rem;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  object-fit: cover;
+}
+
+.about-copy h2 {
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+}
+
+.about-copy blockquote {
+  margin: 1.5rem 0 0;
+  border-left: 4px solid var(--line);
+  padding-left: 1rem;
+}
+
+@media (max-width: 720px) {
+  .site-header {
+    height: 10rem;
+  }
+
+  .nav {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: .8rem 1rem;
+    font-size: 1.05rem;
+  }
+
+  .page {
+    min-height: calc(100vh - 10rem);
+  }
+
+  .post-link,
+  .split,
+  .about-layout,
+  .snippet-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .post-link {
+    gap: .5rem;
+  }
+}
