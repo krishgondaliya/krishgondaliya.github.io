@@ -188,6 +188,36 @@ main {
   font-size: 1.125rem;
 }
 
+.intro-copy {
+  max-width: 46rem;
+  padding: 0 1rem 1rem;
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+
+.intro-copy p {
+  margin: 0;
+}
+
+.section-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem 1rem;
+  padding: 1rem;
+}
+
+.section-links a {
+  color: var(--accent);
+  font-size: 1.15rem;
+  font-weight: 650;
+  transition: color .2s ease, transform .2s ease;
+}
+
+.section-links a:hover {
+  color: var(--accent-strong);
+  transform: translateY(-1px);
+}
+
 .post-list {
   margin: 0;
   padding: 0;
