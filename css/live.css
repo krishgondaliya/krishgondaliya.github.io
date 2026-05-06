@@ -92,6 +92,28 @@ a {
   background-size: cover;
 }
 
+.page-puzzle .site-header {
+  background-image: linear-gradient(var(--header-overlay), var(--header-overlay)), url("/static/images/new-go.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.page-blog .site-header {
+  background-image: linear-gradient(var(--header-overlay), var(--header-overlay)), url("/static/images/julia-set.png");
+}
+
+.page-research .site-header {
+  background-image: linear-gradient(var(--header-overlay), var(--header-overlay)), url("/static/images/super-booster.png");
+}
+
+.page-notes .site-header {
+  background-image: linear-gradient(var(--header-overlay), var(--header-overlay)), url("/static/images/virtruvian-2.png");
+}
+
+.page-projects .site-header {
+  background-image: linear-gradient(var(--header-overlay), var(--header-overlay)), url("/static/images/turing-machine.png");
+}
+
 .header-inner {
   display: flex;
   height: 100%;
@@ -102,11 +124,11 @@ a {
 }
 
 .brand {
-  width: fit-content;
   color: #fff8ef;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 1.875rem;
-  font-weight: 800;
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  font-family: "Cascadia Mono", "Cascadia Code", "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 .brand:hover,
@@ -116,13 +138,31 @@ a {
   color: var(--accent-strong);
 }
 
+.brand-ascii {
+  display: block;
+  margin: 0;
+  color: #f8f8f2;
+  font: 700 clamp(.25rem, .78vw, .74rem)/1 "Cascadia Mono", "Cascadia Code", "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: 0;
+  white-space: pre;
+}
+
+.brand-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
 .nav {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   gap: 1.5rem;
   color: #fff8ef;
-  font-size: 1.25rem;
+  font-size: 1.4rem;
   font-weight: 650;
 }
 
@@ -215,7 +255,7 @@ time {
   margin: 0;
   padding: 1.5rem 0;
   border-bottom: 1px solid var(--line);
-  font-size: clamp(2.5rem, 7vw, 3.75rem);
+  font-size: clamp(2rem, 5vw, 3rem);
   line-height: 1.1;
 }
 
@@ -314,8 +354,62 @@ time {
 .avatar {
   width: 12rem;
   aspect-ratio: 1;
-  border-radius: 999px;
+  border-radius: .35rem;
   object-fit: cover;
+}
+
+.profile-panel {
+  width: 12rem;
+}
+
+.social-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: .7rem;
+  margin-top: 1rem;
+}
+
+.profile-name {
+  margin: 1rem 0 0;
+  font-size: 1.25rem;
+  line-height: 1.25;
+  text-align: left;
+}
+
+.profile-meta {
+  margin-top: .6rem;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.profile-meta p {
+  margin: .15rem 0;
+}
+
+.icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .45rem;
+  color: var(--muted);
+  font-size: 1.08rem;
+  font-weight: 600;
+  line-height: 1;
+  transition: color .2s ease, transform .2s ease;
+}
+
+.icon-link:hover,
+.icon-link:focus-visible {
+  color: var(--accent-strong);
+  transform: translateY(-1px);
+}
+
+.icon-link svg {
+  width: 1.12rem;
+  height: 1.12rem;
 }
 
 .about-copy h2 {
@@ -336,7 +430,7 @@ time {
 
   .nav {
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: center;
     gap: .8rem 1rem;
     font-size: 1.05rem;
   }
@@ -350,6 +444,10 @@ time {
   .about-layout,
   .snippet-grid {
     grid-template-columns: 1fr;
+  }
+
+  .profile-panel {
+    width: min(12rem, 100%);
   }
 
   .post-link {
