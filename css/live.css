@@ -106,7 +106,7 @@ a {
   background-image: linear-gradient(var(--header-overlay), var(--header-overlay)), url("/static/images/super-booster.png");
 }
 
-.page-books .site-header {
+.page-readings .site-header {
   background-image: linear-gradient(var(--header-overlay), var(--header-overlay)), url("/static/images/virtruvian-2.png");
 }
 
