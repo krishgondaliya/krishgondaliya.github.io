@@ -171,6 +171,9 @@
       image.src = entry.thumbnail;
       image.alt = entry.title ? entry.title + " cover" : "Reading cover";
       image.loading = "lazy";
+      image.addEventListener("error", function () {
+        wrap.textContent = (entry.type || "note").slice(0, 2).toUpperCase();
+      });
       wrap.appendChild(image);
       return wrap;
     }
@@ -341,7 +344,7 @@
   function init() {
     root.appendChild(createElement("p", "readings-state", "Loading readings..."));
 
-    fetch("/data/readings.json")
+    fetch("/data/readings.json?v=thumbnails-1", { cache: "no-store" })
       .then(function (response) {
         if (!response.ok) throw new Error("Unable to load readings data.");
         return response.json();
