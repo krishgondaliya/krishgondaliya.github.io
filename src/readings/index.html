@@ -7,8 +7,9 @@
   <meta name="description" content="Readings and notes">
   <link rel="icon" type="image/png" href="/static/images/icon.png">
   <link rel="apple-touch-icon" href="/static/images/icon.png">
-  <link rel="stylesheet" href="/css/live.css?v=page-backgrounds-1">
+  <link rel="stylesheet" href="/css/live.css?v=readings-v1">
   <script src="/scripts/theme-toggle.js"></script>
+  <script src="/scripts/readings.js" defer></script>
 </head>
 <body class="page-readings">
   <header class="site-header">
@@ -45,7 +46,32 @@
   <div class="page shell">
     <main>
       <h1 class="page-title">My notes from readings</h1>
-      <p class="tagline">Coming soon.</p>
+      <section class="readings-intro" aria-label="Readings introduction">
+        <p>
+          A structured notebook for books, papers, technical investigations, unfinished explorations,
+          and simulation ideas. Everything here is read-only for visitors and maintained from local
+          repository files.
+        </p>
+      </section>
+      <section class="readings-controls" aria-label="Readings filters">
+        <label>
+          Search
+          <input id="readings-search" type="search" placeholder="Title, author, tag, or summary">
+        </label>
+        <label>
+          Status
+          <select id="readings-status">
+            <option value="all">All statuses</option>
+          </select>
+        </label>
+        <label>
+          Tag
+          <select id="readings-tag">
+            <option value="all">All tags</option>
+          </select>
+        </label>
+      </section>
+      <div id="readings-root" class="readings-root" aria-live="polite"></div>
     </main>
     <footer class="footer"><span>Krish Gondaliya</span><span>&bull;</span><span>&copy; 2026</span></footer>
   </div>
