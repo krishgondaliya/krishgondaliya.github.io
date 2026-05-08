@@ -62,6 +62,166 @@
             }
           ]
         }
+        ,
+        {
+          "id": "the-algorithm-design-manual",
+          "type": "book",
+          "title": "The Algorithm Design Manual",
+          "author": "Steven S. Skiena",
+          "source": "Book",
+          "status": "queued",
+          "priority": "high",
+          "tags": ["algorithms", "data-structures", "problem-solving"],
+          "thumbnail": "/static/images/algorithms-2.jpg",
+          "summary": "Planned notes on algorithm design patterns, data structures, graph algorithms, combinatorial search, dynamic programming, and practical problem-solving heuristics.",
+          "updated": "2026-05-08",
+          "groups": [
+            {
+              "id": "reading-plan",
+              "title": "Reading plan",
+              "kind": "log",
+              "summary": "Initial queue for chapter-wise notes.",
+              "blocks": [
+                {
+                  "type": "bullets",
+                  "items": [
+                    "Track core design techniques and the problems they naturally solve.",
+                    "Write down implementation patterns worth reusing in C++.",
+                    "Collect examples where the right data structure changes the whole solution."
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "operating-systems-three-easy-pieces",
+          "type": "book",
+          "title": "Operating Systems: Three Easy Pieces",
+          "author": "Remzi H. Arpaci-Dusseau and Andrea C. Arpaci-Dusseau",
+          "source": "Book",
+          "status": "queued",
+          "priority": "high",
+          "tags": ["operating-systems", "systems", "concurrency", "memory"],
+          "thumbnail": "/static/images/ostep2.jpg",
+          "thumbnailWidth": "8rem",
+          "summary": "Planned notes on virtualization, concurrency, persistence, scheduling, memory management, file systems, and the OS abstractions that shape systems programming.",
+          "updated": "2026-05-08",
+          "groups": [
+            {
+              "id": "reading-plan",
+              "title": "Reading plan",
+              "kind": "log",
+              "summary": "Initial structure for chapter-wise operating systems notes.",
+              "blocks": [
+                {
+                  "type": "bullets",
+                  "items": [
+                    "Track the three central themes: virtualization, concurrency, and persistence.",
+                    "Connect each chapter to C/C++ systems programming behavior.",
+                    "Write small experiments for scheduling, memory allocation, synchronization, and file-system behavior."
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "cpp-concurrency-in-action",
+          "type": "book",
+          "title": "C++ Concurrency in Action",
+          "author": "Anthony Williams",
+          "source": "Book",
+          "status": "queued",
+          "priority": "high",
+          "tags": ["cpp", "concurrency", "systems", "performance"],
+          "thumbnail": "/static/images/c++-concurrency-in-action.jpg",
+          "thumbnailWidth": "8rem",
+          "summary": "Planned notes on the C++ concurrency model, threads, synchronization, atomics, lock-free design, futures, and practical patterns for safe parallel systems.",
+          "updated": "2026-05-08",
+          "groups": [
+            {
+              "id": "reading-plan",
+              "title": "Reading plan",
+              "kind": "log",
+              "summary": "Initial structure for concurrency notes and implementation experiments.",
+              "blocks": [
+                {
+                  "type": "bullets",
+                  "items": [
+                    "Track the difference between language-level guarantees and operating-system scheduling behavior.",
+                    "Write small experiments for mutexes, condition variables, atomics, memory ordering, and futures.",
+                    "Collect patterns that are useful for latency-sensitive C++ systems."
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "tcp-ip-illustrated-volume-1",
+          "type": "book",
+          "title": "TCP/IP Illustrated, Volume 1",
+          "author": "W. Richard Stevens",
+          "source": "Book",
+          "status": "queued",
+          "priority": "high",
+          "tags": ["networking", "tcp-ip", "systems", "protocols"],
+          "thumbnail": "/static/images/tcp-ip.jpg",
+          "thumbnailWidth": "8rem",
+          "summary": "Planned notes on TCP/IP internals, packet structure, routing, addressing, transport behavior, and the protocol details behind networked systems.",
+          "updated": "2026-05-08",
+          "groups": [
+            {
+              "id": "reading-plan",
+              "title": "Reading plan",
+              "kind": "log",
+              "summary": "Initial structure for protocol and packet-level notes.",
+              "blocks": [
+                {
+                  "type": "bullets",
+                  "items": [
+                    "Track how each protocol layer maps to observable packet behavior.",
+                    "Connect packet-level details to latency, reliability, and congestion behavior.",
+                    "Build small experiments with sockets, packet captures, and network debugging tools."
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "inside-the-machine",
+          "type": "book",
+          "title": "Inside the Machine",
+          "author": "Jon Stokes",
+          "source": "Book",
+          "status": "queued",
+          "priority": "medium",
+          "tags": ["computer-architecture", "performance", "processors", "systems"],
+          "thumbnail": "/static/images/inside-the-machine.jpg",
+          "thumbnailWidth": "8rem",
+          "summary": "Planned notes on computer architecture, processor design, instruction execution, pipelines, memory hierarchy, and how hardware shapes software performance.",
+          "updated": "2026-05-08",
+          "groups": [
+            {
+              "id": "reading-plan",
+              "title": "Reading plan",
+              "kind": "log",
+              "summary": "Initial structure for architecture and performance notes.",
+              "blocks": [
+                {
+                  "type": "bullets",
+                  "items": [
+                    "Track how processor architecture affects real software performance.",
+                    "Connect pipeline, cache, and execution concepts to C/C++ performance work.",
+                    "Collect diagrams and examples that clarify how instructions move through hardware."
+                  ]
+                }
+              ]
+            }
+          ]
+        }
       ]
     },
     {
@@ -73,6 +233,7 @@
           "id": "mapreduce",
           "type": "paper",
           "title": "MapReduce: Simplified Data Processing on Large Clusters",
+          "url": "https://static.googleusercontent.com/media/research.google.com/en//archive/mapreduce-osdi04.pdf",
           "author": "Jeffrey Dean and Sanjay Ghemawat",
           "source": "OSDI 2004",
           "status": "studying",

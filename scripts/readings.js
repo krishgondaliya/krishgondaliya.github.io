@@ -131,24 +131,25 @@
 
   function renderEntry(entry) {
     var details = createElement("details", "reading-entry");
-    var summary = createElement("summary", "reading-card");
+    var summary = createElement("summary", "reading-row");
+    summary.appendChild(renderEntryTitle(entry));
+    summary.appendChild(createElement("span", "reading-row-status", formatLabel(entry.status || "notes")));
+    details.appendChild(summary);
 
-    summary.appendChild(renderThumbnail(entry));
+    var panel = createElement("div", "reading-panel");
+    panel.appendChild(renderThumbnail(entry));
 
-    var body = createElement("span", "reading-card-body");
-    var eyebrow = createElement("span", "reading-eyebrow", [entry.type, entry.status].filter(Boolean).map(formatLabel).join(" / "));
-    var title = createElement("strong", "reading-title", entry.title || "Untitled reading");
+    var body = createElement("div", "reading-card-body");
+    var meta = renderEntryMeta(entry);
     var author = createElement("span", "reading-author", [entry.author, entry.source].filter(Boolean).join(" - "));
     var description = createElement("span", "reading-summary", entry.summary || "");
 
-    body.appendChild(eyebrow);
-    body.appendChild(title);
+    body.appendChild(meta);
     body.appendChild(author);
     body.appendChild(description);
     body.appendChild(renderTags(entry.tags || []));
-    summary.appendChild(body);
-
-    details.appendChild(summary);
+    panel.appendChild(body);
+    details.appendChild(panel);
 
     var notes = createElement("div", "reading-notes");
     if (Array.isArray(entry.groups) && entry.groups.length) {
@@ -163,14 +164,51 @@
     return details;
   }
 
+  function renderEntryMeta(entry) {
+    var meta = createElement("span", "reading-meta");
+    var parts = [
+      ["Type", entry.type],
+      ["Status", entry.status],
+      ["Priority", entry.priority]
+    ];
+
+    parts.forEach(function (part) {
+      if (!part[1]) return;
+      meta.appendChild(createElement("span", "reading-eyebrow", part[0] + ": " + formatLabel(part[1])));
+    });
+
+    return meta;
+  }
+
+  function renderEntryTitle(entry) {
+    var title = createElement("strong", "reading-title");
+
+    if (entry.url) {
+      var link = createElement("a", null, entry.title || "Untitled reading");
+      link.href = entry.url;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      title.appendChild(link);
+      return title;
+    }
+
+    title.textContent = entry.title || "Untitled reading";
+    return title;
+  }
+
   function renderThumbnail(entry) {
     var wrap = createElement("span", "reading-thumbnail");
+    if (entry.id) wrap.classList.add("reading-thumbnail-" + entry.id);
 
     if (entry.thumbnail) {
       var image = document.createElement("img");
       image.src = entry.thumbnail;
       image.alt = entry.title ? entry.title + " cover" : "Reading cover";
       image.loading = "lazy";
+      // Standard book-cover thumbnail width is 8rem unless an entry needs a custom size.
+      if (entry.thumbnailWidth) {
+        image.style.width = entry.thumbnailWidth;
+      }
       image.addEventListener("error", function () {
         wrap.textContent = (entry.type || "note").slice(0, 2).toUpperCase();
       });
@@ -184,6 +222,9 @@
 
   function renderTags(tags) {
     var wrap = createElement("span", "reading-tags");
+    if (tags.length) {
+      wrap.appendChild(createElement("strong", null, "Tags:"));
+    }
     tags.forEach(function (tag) {
       wrap.appendChild(createElement("span", null, formatLabel(tag)));
     });
@@ -344,7 +385,7 @@
   function init() {
     root.appendChild(createElement("p", "readings-state", "Loading readings..."));
 
-    fetch("/data/readings.json?v=thumbnails-1", { cache: "no-store" })
+    fetch("/data/readings.json?v=thumbnails-3", { cache: "no-store" })
       .then(function (response) {
         if (!response.ok) throw new Error("Unable to load readings data.");
         return response.json();

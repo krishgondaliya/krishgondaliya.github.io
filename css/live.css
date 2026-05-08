@@ -513,14 +513,14 @@ time {
 }
 
 .readings-section-summary,
-.reading-card,
+.reading-row,
 .note-group-summary {
   cursor: pointer;
   list-style: none;
 }
 
 .readings-section-summary::-webkit-details-marker,
-.reading-card::-webkit-details-marker,
+.reading-row::-webkit-details-marker,
 .note-group-summary::-webkit-details-marker {
   display: none;
 }
@@ -577,39 +577,73 @@ time {
   background: var(--bg);
 }
 
-.reading-card {
-  display: grid;
-  grid-template-columns: 7rem 1fr;
+.reading-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 1rem;
-  padding: 1rem;
+  padding: .85rem 1rem;
   transition: background .2s ease, border-color .2s ease;
 }
 
-.reading-card:hover {
+.reading-row:hover {
   background: var(--panel);
 }
 
-.reading-thumbnail {
-  display: grid;
-  width: 7rem;
-  aspect-ratio: 3 / 4;
-  place-items: center;
+.reading-row-status {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
   border: 1px solid var(--line);
-  border-radius: .35rem;
-  background: var(--panel);
+  border-radius: 999px;
+  padding: .15rem .5rem;
+  color: var(--accent);
+  font-size: .78rem;
+  font-weight: 750;
+}
+
+.reading-panel {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  padding: 0 1rem 1rem;
+}
+
+.reading-thumbnail {
+  display: block;
+  max-width: min(16rem, 32vw);
   color: var(--accent);
   font-weight: 800;
 }
 
 .reading-thumbnail img {
-  width: 100%;
-  height: 100%;
-  border-radius: .3rem;
-  object-fit: cover;
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: .35rem;
+}
+
+.reading-thumbnail-designing-data-intensive-applications img,
+.reading-thumbnail-the-algorithm-design-manual img,
+.reading-thumbnail img[src$="ddia.jpg"],
+.reading-thumbnail img[src$="algorithms-2.jpg"] {
+  width: min(8rem, 16vw);
+}
+
+.reading-thumbnail-operating-systems-three-easy-pieces img,
+.reading-thumbnail img[src$="ostep2.jpg"] {
+  width: min(3rem, 6vw);
 }
 
 .reading-card-body {
   display: grid;
+  gap: .35rem;
+}
+
+.reading-meta {
+  display: flex;
+  flex-wrap: wrap;
   gap: .35rem;
 }
 
@@ -628,8 +662,14 @@ time {
 .reading-tags {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: .35rem;
   margin-top: .25rem;
+}
+
+.reading-tags strong {
+  color: var(--muted);
+  font-size: .85rem;
 }
 
 .reading-notes {
@@ -771,11 +811,29 @@ time {
     gap: .5rem;
   }
 
-  .reading-card {
-    grid-template-columns: 5rem 1fr;
+  .reading-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: .35rem;
+  }
+
+  .reading-panel {
+    grid-template-columns: 1fr;
   }
 
   .reading-thumbnail {
-    width: 5rem;
+    max-width: min(100%, 18rem);
+  }
+
+  .reading-thumbnail-designing-data-intensive-applications img,
+  .reading-thumbnail-the-algorithm-design-manual img,
+  .reading-thumbnail img[src$="ddia.jpg"],
+  .reading-thumbnail img[src$="algorithms-2.jpg"] {
+    width: min(100%, 9rem);
+  }
+
+  .reading-thumbnail-operating-systems-three-easy-pieces img,
+  .reading-thumbnail img[src$="ostep2.jpg"] {
+    width: min(100%, 3.5rem);
   }
 }
