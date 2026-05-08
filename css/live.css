@@ -102,7 +102,7 @@ a {
   background-image: linear-gradient(var(--header-overlay), var(--header-overlay)), url("/static/images/julia-set.png");
 }
 
-.page-research .site-header {
+.page-problem-solving .site-header {
   background-image: linear-gradient(var(--header-overlay), var(--header-overlay)), url("/static/images/super-booster.png");
 }
 
