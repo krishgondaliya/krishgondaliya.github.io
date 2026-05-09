@@ -14,7 +14,11 @@
           "source": "OSDI 2004",
           "status": "studying",
           "priority": "medium",
-          "tags": ["distributed-systems", "fault-tolerance", "batch-processing"],
+          "tags": [
+            "distributed-systems",
+            "fault-tolerance",
+            "batch-processing"
+          ],
           "thumbnail": "/static/images/map_reduce.png",
           "summary": "A study of the programming model, runtime responsibilities, and why restricted abstractions can make distributed execution manageable.",
           "updated": "2026-05-08",
@@ -53,233 +57,841 @@
           "title": "Engineering",
           "entries": [
             {
-          "id": "designing-data-intensive-applications",
-          "type": "book",
-          "title": "Designing Data-Intensive Applications",
-          "author": "Martin Kleppmann",
-          "source": "Book",
-          "status": "reading",
-          "priority": "high",
-          "tags": ["distributed-systems", "databases", "reliability"],
-          "thumbnail": "/static/images/ddia.jpg",
-          "summary": "Working notes on reliability, scalability, maintainability, replication, partitioning, and the tradeoffs behind data systems.",
-          "updated": "2026-05-08",
-          "groups": [
-            {
-              "id": "chapter-1",
-              "title": "Chapter 1: Reliable, Scalable, and Maintainable Applications",
-              "kind": "chapter",
-              "summary": "A vocabulary for judging systems beyond whether they simply work.",
-              "blocks": [
+              "id": "designing-data-intensive-applications",
+              "type": "book",
+              "title": "Designing Data-Intensive Applications",
+              "author": "Martin Kleppmann",
+              "source": "Book",
+              "status": "reading",
+              "priority": "high",
+              "tags": [
+                "distributed-systems",
+                "databases",
+                "reliability"
+              ],
+              "thumbnail": "/static/images/ddia.jpg",
+              "summary": "Working notes on reliability, scalability, maintainability, replication, partitioning, and the tradeoffs behind data systems.",
+              "updated": "2026-05-08",
+              "groups": [
                 {
-                  "type": "paragraph",
-                  "content": "The chapter frames engineering quality around reliability, scalability, and maintainability. I want these notes to track not only definitions, but also where those ideas show up in real infrastructure."
-                },
-                {
-                  "type": "bullets",
-                  "items": [
-                    "Reliability is about continuing to work correctly when faults happen.",
-                    "Scalability is a question about how load changes the shape of a system.",
-                    "Maintainability depends heavily on operability, simplicity, and evolvability."
+                  "id": "chapter-1",
+                  "title": "Chapter 1: Reliable, Scalable, and Maintainable Applications",
+                  "kind": "chapter",
+                  "summary": "A vocabulary for judging systems beyond whether they simply work.",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "content": "The chapter frames engineering quality around reliability, scalability, and maintainability. I want these notes to track not only definitions, but also where those ideas show up in real infrastructure."
+                    },
+                    {
+                      "type": "bullets",
+                      "items": [
+                        "Reliability is about continuing to work correctly when faults happen.",
+                        "Scalability is a question about how load changes the shape of a system.",
+                        "Maintainability depends heavily on operability, simplicity, and evolvability."
+                      ]
+                    },
+                    {
+                      "type": "callout",
+                      "title": "Question to revisit",
+                      "content": "What failure modes would appear first in a small trading-data ingestion pipeline: throughput, latency variance, observability, or schema drift?"
+                    }
                   ]
                 },
                 {
-                  "type": "callout",
-                  "title": "Question to revisit",
-                  "content": "What failure modes would appear first in a small trading-data ingestion pipeline: throughput, latency variance, observability, or schema drift?"
+                  "id": "chapter-2",
+                  "title": "Chapter 2: Data Models and Query Languages",
+                  "kind": "chapter",
+                  "summary": "Notes on how data models shape the questions a system can answer naturally.",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "content": "The important idea is that data models are not passive containers. They influence the abstractions, performance assumptions, and failure boundaries of the system."
+                    },
+                    {
+                      "type": "code",
+                      "language": "sql",
+                      "content": "SELECT symbol, max(price)\nFROM ticks\nWHERE ts >= now() - interval '1 minute'\nGROUP BY symbol;"
+                    }
+                  ]
                 }
               ]
             },
             {
-              "id": "chapter-2",
-              "title": "Chapter 2: Data Models and Query Languages",
-              "kind": "chapter",
-              "summary": "Notes on how data models shape the questions a system can answer naturally.",
-              "blocks": [
+              "id": "the-algorithm-design-manual",
+              "type": "book",
+              "title": "The Algorithm Design Manual",
+              "author": "Steven S. Skiena",
+              "source": "Book",
+              "status": "queued",
+              "priority": "high",
+              "tags": [
+                "algorithms",
+                "data-structures",
+                "problem-solving"
+              ],
+              "thumbnail": "/static/images/algorithms-2.jpg",
+              "summary": "Planned notes on algorithm design patterns, data structures, graph algorithms, combinatorial search, dynamic programming, and practical problem-solving heuristics.",
+              "updated": "2026-05-08",
+              "groups": [
                 {
-                  "type": "paragraph",
-                  "content": "The important idea is that data models are not passive containers. They influence the abstractions, performance assumptions, and failure boundaries of the system."
-                },
-                {
-                  "type": "code",
-                  "language": "sql",
-                  "content": "SELECT symbol, max(price)\nFROM ticks\nWHERE ts >= now() - interval '1 minute'\nGROUP BY symbol;"
-                }
-              ]
-            }
-          ]
-        }
-        ,
-        {
-          "id": "the-algorithm-design-manual",
-          "type": "book",
-          "title": "The Algorithm Design Manual",
-          "author": "Steven S. Skiena",
-          "source": "Book",
-          "status": "queued",
-          "priority": "high",
-          "tags": ["algorithms", "data-structures", "problem-solving"],
-          "thumbnail": "/static/images/algorithms-2.jpg",
-          "summary": "Planned notes on algorithm design patterns, data structures, graph algorithms, combinatorial search, dynamic programming, and practical problem-solving heuristics.",
-          "updated": "2026-05-08",
-          "groups": [
-            {
-              "id": "reading-plan",
-              "title": "Reading plan",
-              "kind": "log",
-              "summary": "Initial queue for chapter-wise notes.",
-              "blocks": [
-                {
-                  "type": "bullets",
-                  "items": [
-                    "Track core design techniques and the problems they naturally solve.",
-                    "Write down implementation patterns worth reusing in C++.",
-                    "Collect examples where the right data structure changes the whole solution."
+                  "id": "reading-plan",
+                  "title": "Reading plan",
+                  "kind": "log",
+                  "summary": "Initial queue for chapter-wise notes.",
+                  "blocks": [
+                    {
+                      "type": "bullets",
+                      "items": [
+                        "Track core design techniques and the problems they naturally solve.",
+                        "Write down implementation patterns worth reusing in C++.",
+                        "Collect examples where the right data structure changes the whole solution."
+                      ]
+                    }
                   ]
                 }
               ]
-            }
-          ]
-        },
-        {
-          "id": "operating-systems-three-easy-pieces",
-          "type": "book",
-          "title": "Operating Systems: Three Easy Pieces",
-          "author": "Remzi H. Arpaci-Dusseau and Andrea C. Arpaci-Dusseau",
-          "source": "Book",
-          "status": "queued",
-          "priority": "high",
-          "tags": ["operating-systems", "systems", "concurrency", "memory"],
-          "thumbnail": "/static/images/ostep2.jpg",
-          "thumbnailWidth": "8rem",
-          "summary": "Planned notes on virtualization, concurrency, persistence, scheduling, memory management, file systems, and the OS abstractions that shape systems programming.",
-          "updated": "2026-05-08",
-          "groups": [
+            },
             {
-              "id": "reading-plan",
-              "title": "Reading plan",
-              "kind": "log",
-              "summary": "Initial structure for chapter-wise operating systems notes.",
-              "blocks": [
+              "id": "operating-systems-three-easy-pieces",
+              "type": "book",
+              "title": "Operating Systems: Three Easy Pieces",
+              "author": "Remzi H. Arpaci-Dusseau and Andrea C. Arpaci-Dusseau",
+              "source": "Book",
+              "status": "queued",
+              "priority": "high",
+              "tags": [
+                "operating-systems",
+                "systems",
+                "concurrency",
+                "memory"
+              ],
+              "thumbnail": "/static/images/ostep2.jpg",
+              "thumbnailWidth": "8rem",
+              "summary": "Planned notes on virtualization, concurrency, persistence, scheduling, memory management, file systems, and the OS abstractions that shape systems programming.",
+              "updated": "2026-05-08",
+              "groups": [
                 {
-                  "type": "bullets",
-                  "items": [
-                    "Track the three central themes: virtualization, concurrency, and persistence.",
-                    "Connect each chapter to C/C++ systems programming behavior.",
-                    "Write small experiments for scheduling, memory allocation, synchronization, and file-system behavior."
+                  "id": "reading-plan",
+                  "title": "Reading plan",
+                  "kind": "log",
+                  "summary": "Initial structure for chapter-wise operating systems notes.",
+                  "blocks": [
+                    {
+                      "type": "bullets",
+                      "items": [
+                        "Track the three central themes: virtualization, concurrency, and persistence.",
+                        "Connect each chapter to C/C++ systems programming behavior.",
+                        "Write small experiments for scheduling, memory allocation, synchronization, and file-system behavior."
+                      ]
+                    }
                   ]
                 }
               ]
-            }
-          ]
-        },
-        {
-          "id": "cpp-concurrency-in-action",
-          "type": "book",
-          "title": "C++ Concurrency in Action",
-          "author": "Anthony Williams",
-          "source": "Book",
-          "status": "queued",
-          "priority": "high",
-          "tags": ["cpp", "concurrency", "systems", "performance"],
-          "thumbnail": "/static/images/c++-concurrency-in-action.jpg",
-          "thumbnailWidth": "8rem",
-          "summary": "Planned notes on the C++ concurrency model, threads, synchronization, atomics, lock-free design, futures, and practical patterns for safe parallel systems.",
-          "updated": "2026-05-08",
-          "groups": [
+            },
             {
-              "id": "reading-plan",
-              "title": "Reading plan",
-              "kind": "log",
-              "summary": "Initial structure for concurrency notes and implementation experiments.",
-              "blocks": [
+              "id": "cpp-concurrency-in-action",
+              "type": "book",
+              "title": "C++ Concurrency in Action",
+              "author": "Anthony Williams",
+              "source": "Book",
+              "status": "queued",
+              "priority": "high",
+              "tags": [
+                "cpp",
+                "concurrency",
+                "systems",
+                "performance"
+              ],
+              "thumbnail": "/static/images/c++-concurrency-in-action.jpg",
+              "thumbnailWidth": "8rem",
+              "summary": "Planned notes on the C++ concurrency model, threads, synchronization, atomics, lock-free design, futures, and practical patterns for safe parallel systems.",
+              "updated": "2026-05-08",
+              "groups": [
                 {
-                  "type": "bullets",
-                  "items": [
-                    "Track the difference between language-level guarantees and operating-system scheduling behavior.",
-                    "Write small experiments for mutexes, condition variables, atomics, memory ordering, and futures.",
-                    "Collect patterns that are useful for latency-sensitive C++ systems."
+                  "id": "reading-plan",
+                  "title": "Reading plan",
+                  "kind": "log",
+                  "summary": "Initial structure for concurrency notes and implementation experiments.",
+                  "blocks": [
+                    {
+                      "type": "bullets",
+                      "items": [
+                        "Track the difference between language-level guarantees and operating-system scheduling behavior.",
+                        "Write small experiments for mutexes, condition variables, atomics, memory ordering, and futures.",
+                        "Collect patterns that are useful for latency-sensitive C++ systems."
+                      ]
+                    }
                   ]
                 }
               ]
-            }
-          ]
-        },
-        {
-          "id": "tcp-ip-illustrated-volume-1",
-          "type": "book",
-          "title": "TCP/IP Illustrated, Volume 1",
-          "author": "W. Richard Stevens",
-          "source": "Book",
-          "status": "queued",
-          "priority": "high",
-          "tags": ["networking", "tcp-ip", "systems", "protocols"],
-          "thumbnail": "/static/images/tcp-ip.jpg",
-          "thumbnailWidth": "8rem",
-          "summary": "Planned notes on TCP/IP internals, packet structure, routing, addressing, transport behavior, and the protocol details behind networked systems.",
-          "updated": "2026-05-08",
-          "groups": [
+            },
             {
-              "id": "reading-plan",
-              "title": "Reading plan",
-              "kind": "log",
-              "summary": "Initial structure for protocol and packet-level notes.",
-              "blocks": [
+              "id": "tcp-ip-illustrated-volume-1",
+              "type": "book",
+              "title": "TCP/IP Illustrated, Volume 1",
+              "author": "W. Richard Stevens",
+              "source": "Book",
+              "status": "queued",
+              "priority": "high",
+              "tags": [
+                "networking",
+                "tcp-ip",
+                "systems",
+                "protocols"
+              ],
+              "thumbnail": "/static/images/tcp-ip.jpg",
+              "thumbnailWidth": "8rem",
+              "summary": "Planned notes on TCP/IP internals, packet structure, routing, addressing, transport behavior, and the protocol details behind networked systems.",
+              "updated": "2026-05-08",
+              "groups": [
                 {
-                  "type": "bullets",
-                  "items": [
-                    "Track how each protocol layer maps to observable packet behavior.",
-                    "Connect packet-level details to latency, reliability, and congestion behavior.",
-                    "Build small experiments with sockets, packet captures, and network debugging tools."
+                  "id": "reading-plan",
+                  "title": "Reading plan",
+                  "kind": "log",
+                  "summary": "Initial structure for protocol and packet-level notes.",
+                  "blocks": [
+                    {
+                      "type": "bullets",
+                      "items": [
+                        "Track how each protocol layer maps to observable packet behavior.",
+                        "Connect packet-level details to latency, reliability, and congestion behavior.",
+                        "Build small experiments with sockets, packet captures, and network debugging tools."
+                      ]
+                    }
                   ]
                 }
               ]
-            }
-          ]
-        },
-        {
-          "id": "inside-the-machine",
-          "type": "book",
-          "title": "Inside the Machine",
-          "author": "Jon Stokes",
-          "source": "Book",
-          "status": "queued",
-          "priority": "medium",
-          "tags": ["computer-architecture", "performance", "processors", "systems"],
-          "thumbnail": "/static/images/inside-the-machine.jpg",
-          "thumbnailWidth": "8rem",
-          "summary": "Planned notes on computer architecture, processor design, instruction execution, pipelines, memory hierarchy, and how hardware shapes software performance.",
-          "updated": "2026-05-08",
-          "groups": [
+            },
             {
-              "id": "reading-plan",
-              "title": "Reading plan",
-              "kind": "log",
-              "summary": "Initial structure for architecture and performance notes.",
-              "blocks": [
+              "id": "inside-the-machine",
+              "type": "book",
+              "title": "Inside the Machine",
+              "author": "Jon Stokes",
+              "source": "Book",
+              "status": "queued",
+              "priority": "medium",
+              "tags": [
+                "computer-architecture",
+                "performance",
+                "processors",
+                "systems"
+              ],
+              "thumbnail": "/static/images/inside-the-machine.jpg",
+              "thumbnailWidth": "8rem",
+              "summary": "Planned notes on computer architecture, processor design, instruction execution, pipelines, memory hierarchy, and how hardware shapes software performance.",
+              "updated": "2026-05-08",
+              "groups": [
                 {
-                  "type": "bullets",
-                  "items": [
-                    "Track how processor architecture affects real software performance.",
-                    "Connect pipeline, cache, and execution concepts to C/C++ performance work.",
-                    "Collect diagrams and examples that clarify how instructions move through hardware."
+                  "id": "reading-plan",
+                  "title": "Reading plan",
+                  "kind": "log",
+                  "summary": "Initial structure for architecture and performance notes.",
+                  "blocks": [
+                    {
+                      "type": "bullets",
+                      "items": [
+                        "Track how processor architecture affects real software performance.",
+                        "Connect pipeline, cache, and execution concepts to C/C++ performance work.",
+                        "Collect diagrams and examples that clarify how instructions move through hardware."
+                      ]
+                    }
                   ]
                 }
               ]
-            }
-          ]
             }
           ]
         },
         {
           "id": "quant",
           "title": "Quant",
-          "entries": []
+          "entries": [
+            {
+              "id": "option-volatility-and-pricing",
+              "type": "book",
+              "title": "Option Volatility and Pricing",
+              "author": "Sheldon Natenberg",
+              "source": "Book",
+              "status": "queued",
+              "priority": "high",
+              "tags": [
+                "quant",
+                "options",
+                "derivatives",
+                "volatility"
+              ],
+              "thumbnail": "/static/images/options-volatility-&-pricing.jpg",
+              "thumbnailWidth": "8rem",
+              "summary": "Planned notes on options markets, volatility, pricing models, Greeks, risk, and practical derivatives trading concepts.",
+              "updated": "2026-05-09",
+              "groups": [
+                {
+                  "id": "reading-plan",
+                  "title": "Reading plan",
+                  "kind": "log",
+                  "summary": "Initial structure for options and volatility notes.",
+                  "blocks": [
+                    {
+                      "type": "bullets",
+                      "items": [
+                        "Track option pricing intuition before formal model details.",
+                        "Connect volatility, Greeks, and risk management to trading infrastructure decisions.",
+                        "Collect formulas and examples that are worth implementing as small experiments."
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "trading-and-exchanges",
+              "type": "book",
+              "title": "Trading and Exchanges",
+              "author": "Larry Harris",
+              "source": "Book",
+              "status": "queued",
+              "priority": "high",
+              "tags": [
+                "quant",
+                "market-microstructure",
+                "trading",
+                "exchanges"
+              ],
+              "thumbnail": "/static/images/trading-and-exchanges.jpg",
+              "thumbnailWidth": "8rem",
+              "summary": "Planned notes on market structure, order types, liquidity, price discovery, trading costs, and how exchanges shape trading behavior.",
+              "updated": "2026-05-09",
+              "groups": [
+                {
+                  "id": "reading-plan",
+                  "title": "Reading plan",
+                  "kind": "log",
+                  "summary": "Initial structure for market microstructure notes.",
+                  "blocks": [
+                    {
+                      "type": "bullets",
+                      "items": [
+                        "Track how order types, liquidity, and market participants interact.",
+                        "Connect market microstructure ideas to exchange systems and matching engines.",
+                        "Collect concepts that are useful for designing trading infrastructure experiments."
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "heard-on-the-street",
+              "type": "book",
+              "title": "Heard on the Street",
+              "author": "Timothy Falcon Crack",
+              "source": "Book",
+              "status": "queued",
+              "priority": "high",
+              "tags": [
+                "quant",
+                "interview-prep",
+                "probability",
+                "finance"
+              ],
+              "thumbnail": "/static/images/heard-on-the-street.jpg",
+              "thumbnailWidth": "8rem",
+              "summary": "Planned notes on quantitative finance interview problems, probability puzzles, derivatives intuition, and market reasoning.",
+              "updated": "2026-05-09",
+              "groups": [
+                {
+                  "id": "reading-plan",
+                  "title": "Reading plan",
+                  "kind": "log",
+                  "summary": "Initial structure for quant interview and finance problem notes.",
+                  "blocks": [
+                    {
+                      "type": "bullets",
+                      "items": [
+                        "Track probability and expected-value patterns that recur across problems.",
+                        "Separate puzzle-solving tricks from durable finance intuition.",
+                        "Collect problems worth re-solving in code or with simulations."
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "green-book",
+              "type": "book",
+              "title": "Green Book: A Practical Guide to Quantitative Finance Interviews",
+              "author": "Xinfeng Zhou",
+              "source": "Book",
+              "status": "queued",
+              "priority": "high",
+              "tags": [
+                "quant",
+                "interview-prep",
+                "probability",
+                "finance"
+              ],
+              "thumbnail": "/static/images/green-book.jpg",
+              "thumbnailWidth": "8rem",
+              "summary": "Planned notes on quantitative finance interview problems, probability, brainteasers, stochastic thinking, and practical problem-solving patterns.",
+              "updated": "2026-05-09",
+              "groups": [
+                {
+                  "id": "reading-plan",
+                  "title": "Reading plan",
+                  "kind": "log",
+                  "summary": "Initial structure for quant interview notes.",
+                  "blocks": [
+                    {
+                      "type": "bullets",
+                      "items": [
+                        "Track probability, combinatorics, and expected-value patterns.",
+                        "Separate reusable solution frameworks from one-off tricks.",
+                        "Collect problems that are worth implementing or simulating."
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "machine-learning",
           "title": "Machine Learning",
-          "entries": []
+          "entries": [
+            {
+              "id": "hands-on-machine-learning",
+              "type": "book",
+              "title": "Hands-On Machine Learning with Scikit-Learn, Keras, & TensorFlow",
+              "author": "Aurelien Geron",
+              "source": "Book",
+              "status": "queued",
+              "priority": "high",
+              "tags": [
+                "machine-learning",
+                "deep-learning",
+                "python",
+                "tensorflow"
+              ],
+              "thumbnail": "/static/images/hands-on-ml-w-scikit-and-tensorflow.jpg",
+              "thumbnailWidth": "8rem",
+              "summary": "Planned notes on practical machine learning workflows, model training, evaluation, neural networks, TensorFlow, and end-to-end ML systems.",
+              "updated": "2026-05-09",
+              "groups": [
+                {
+                  "id": "reading-plan",
+                  "title": "Reading plan",
+                  "kind": "log",
+                  "summary": "Initial structure for hands-on ML implementation notes.",
+                  "blocks": [
+                    {
+                      "type": "bullets",
+                      "items": [
+                        "Track practical workflows from data preparation to evaluation.",
+                        "Connect models to implementation details in Scikit-Learn, Keras, and TensorFlow.",
+                        "Collect experiments that are worth reproducing or extending locally."
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "hundred-page-machine-learning-book",
+              "type": "book",
+              "title": "The Hundred-Page Machine Learning Book",
+              "author": "Andriy Burkov",
+              "source": "Book",
+              "status": "queued",
+              "priority": "medium",
+              "tags": [
+                "machine-learning",
+                "modeling",
+                "statistics",
+                "fundamentals"
+              ],
+              "thumbnail": "/static/images/hundred-page-ml.jpg",
+              "thumbnailWidth": "8rem",
+              "summary": "Planned notes on compact machine learning fundamentals, model evaluation, optimization, feature engineering, and practical modeling intuition.",
+              "updated": "2026-05-09",
+              "groups": [
+                {
+                  "id": "reading-plan",
+                  "title": "Reading plan",
+                  "kind": "log",
+                  "summary": "Initial structure for concise ML fundamentals notes.",
+                  "blocks": [
+                    {
+                      "type": "bullets",
+                      "items": [
+                        "Track the core ideas and assumptions behind common ML methods.",
+                        "Use this as a compressed review companion to longer ML books.",
+                        "Collect definitions and examples that are worth keeping as quick references."
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "probability-and-statistics",
+          "title": "Probability and Statistics",
+          "entries": [
+            {
+              "id": "introduction-to-probability",
+              "type": "book",
+              "title": "Introduction to Probability",
+              "author": "Dimitri P. Bertsekas and John N. Tsitsiklis",
+              "source": "Book",
+              "status": "queued",
+              "priority": "high",
+              "tags": [
+                "probability",
+                "statistics",
+                "random-processes",
+                "math"
+              ],
+              "thumbnail": "/static/images/intro-to-probability-3.jpg",
+              "thumbnailWidth": "8rem",
+              "summary": "Planned notes on probability models, conditioning, random variables, expectation, limit theorems, and probabilistic reasoning.",
+              "updated": "2026-05-09",
+              "groups": [
+                {
+                  "id": "reading-plan",
+                  "title": "Reading plan",
+                  "kind": "log",
+                  "summary": "Initial structure for probability fundamentals.",
+                  "blocks": [
+                    {
+                      "type": "bullets",
+                      "items": [
+                        "Track definitions, theorem conditions, and examples side by side.",
+                        "Connect each chapter to simulations and small verification scripts.",
+                        "Collect probability tools that appear in quant, ML, and systems reliability work."
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "elements-of-statistical-learning",
+              "type": "book",
+              "title": "The Elements of Statistical Learning",
+              "author": "Trevor Hastie, Robert Tibshirani, and Jerome Friedman",
+              "source": "Book",
+              "status": "queued",
+              "priority": "high",
+              "tags": [
+                "statistics",
+                "machine-learning",
+                "probability",
+                "modeling"
+              ],
+              "thumbnail": "/static/images/elements-of-statistical-learning.jpg",
+              "thumbnailWidth": "8rem",
+              "summary": "Planned notes on statistical learning theory, supervised learning, regularization, model selection, trees, boosting, kernels, and high-dimensional methods.",
+              "updated": "2026-05-09",
+              "groups": [
+                {
+                  "id": "reading-plan",
+                  "title": "Reading plan",
+                  "kind": "log",
+                  "summary": "Initial structure for statistical learning notes.",
+                  "blocks": [
+                    {
+                      "type": "bullets",
+                      "items": [
+                        "Track the assumptions behind each model family.",
+                        "Connect statistical learning concepts to implementation and evaluation details.",
+                        "Collect equations and examples that are worth translating into small experiments."
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "fifty-challenging-problems-in-probability",
+              "type": "book",
+              "title": "Fifty Challenging Problems in Probability",
+              "author": "Frederick Mosteller",
+              "source": "Book",
+              "status": "queued",
+              "priority": "high",
+              "tags": [
+                "probability",
+                "problem-solving",
+                "statistics",
+                "puzzles"
+              ],
+              "thumbnail": "/static/images/50-challenging-problems.jpg",
+              "thumbnailWidth": "8rem",
+              "summary": "Planned notes on classic probability problems, combinatorial reasoning, expectation, conditioning, and careful probabilistic intuition.",
+              "updated": "2026-05-09",
+              "groups": [
+                {
+                  "id": "reading-plan",
+                  "title": "Reading plan",
+                  "kind": "log",
+                  "summary": "Initial structure for probability problem notes.",
+                  "blocks": [
+                    {
+                      "type": "bullets",
+                      "items": [
+                        "Track each problem's setup, key insight, and common trap.",
+                        "Re-solve selected problems algebraically and with simulation.",
+                        "Collect reusable probability patterns for interviews and research notes."
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "game-theory",
+          "title": "Game Theory",
+          "entries": [
+            {
+              "id": "game-theory-an-introduction",
+              "type": "book",
+              "title": "Game Theory: An Introduction",
+              "author": "Steven Tadelis",
+              "source": "Book",
+              "status": "queued",
+              "priority": "high",
+              "tags": [
+                "game-theory",
+                "economics",
+                "strategy",
+                "decision-making"
+              ],
+              "thumbnail": "/static/images/game-theory-tadelis.jpg",
+              "thumbnailWidth": "8rem",
+              "summary": "Planned notes on strategic interaction, Nash equilibrium, dynamic games, incomplete information, auctions, bargaining, and mechanism design foundations.",
+              "updated": "2026-05-09",
+              "groups": [
+                {
+                  "id": "reading-plan",
+                  "title": "Reading plan",
+                  "kind": "log",
+                  "summary": "Initial structure for game theory notes.",
+                  "blocks": [
+                    {
+                      "type": "bullets",
+                      "items": [
+                        "Track core definitions and equilibrium concepts carefully.",
+                        "Connect examples to markets, auctions, and strategic decision-making.",
+                        "Collect problems that are worth modeling or simulating."
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "physics",
+          "title": "Physics",
+          "entries": [
+            {
+              "id": "six-easy-pieces",
+              "type": "book",
+              "title": "Six Easy Pieces",
+              "author": "Richard P. Feynman",
+              "source": "Book",
+              "status": "queued",
+              "priority": "medium",
+              "tags": [
+                "physics",
+                "feynman",
+                "fundamentals",
+                "science"
+              ],
+              "thumbnail": "/static/images/six-easy-pieces.jpg",
+              "thumbnailWidth": "8rem",
+              "summary": "Planned notes on fundamental physics ideas, Feynman's explanations, conservation laws, gravitation, quantum behavior, and the relationship between intuition and formal models.",
+              "updated": "2026-05-09",
+              "groups": [
+                {
+                  "id": "reading-plan",
+                  "title": "Reading plan",
+                  "kind": "log",
+                  "summary": "Initial structure for physics fundamentals notes.",
+                  "blocks": [
+                    {
+                      "type": "bullets",
+                      "items": [
+                        "Track the core physical intuition behind each lecture.",
+                        "Write down analogies that make abstract ideas easier to remember.",
+                        "Collect equations or diagrams that are worth revisiting later."
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "six-not-so-easy-pieces",
+              "type": "book",
+              "title": "Six Not-So-Easy Pieces",
+              "author": "Richard P. Feynman",
+              "source": "Book",
+              "status": "queued",
+              "priority": "medium",
+              "tags": [
+                "physics",
+                "feynman",
+                "relativity",
+                "science"
+              ],
+              "thumbnail": "/static/images/six-not-so-easy.jpg",
+              "thumbnailWidth": "8rem",
+              "summary": "Planned notes on relativity, spacetime, symmetry, vectors, and the harder conceptual foundations from Feynman's lectures.",
+              "updated": "2026-05-09",
+              "groups": [
+                {
+                  "id": "reading-plan",
+                  "title": "Reading plan",
+                  "kind": "log",
+                  "summary": "Initial structure for relativity and advanced physics notes.",
+                  "blocks": [
+                    {
+                      "type": "bullets",
+                      "items": [
+                        "Track the geometric intuition behind relativity.",
+                        "Connect vectors, symmetry, and physical laws across chapters.",
+                        "Collect explanations that make the difficult pieces feel less opaque."
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "qed-strange-theory-of-light-and-matter",
+              "type": "book",
+              "title": "QED: The Strange Theory of Light and Matter",
+              "author": "Richard P. Feynman",
+              "source": "Book",
+              "status": "queued",
+              "priority": "medium",
+              "tags": [
+                "physics",
+                "feynman",
+                "quantum-electrodynamics",
+                "science"
+              ],
+              "thumbnail": "/static/images/QED.jpg",
+              "thumbnailWidth": "8rem",
+              "summary": "Planned notes on quantum electrodynamics, photons, electrons, probability amplitudes, reflection, refraction, and Feynman diagrams.",
+              "updated": "2026-05-09",
+              "groups": [
+                {
+                  "id": "reading-plan",
+                  "title": "Reading plan",
+                  "kind": "log",
+                  "summary": "Initial structure for QED notes.",
+                  "blocks": [
+                    {
+                      "type": "bullets",
+                      "items": [
+                        "Track how Feynman explains quantum behavior without hiding the weirdness.",
+                        "Connect probability amplitudes and diagrams to the physical examples.",
+                        "Collect explanations that clarify light, matter, and interaction at a conceptual level."
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "quantum-mechanics-the-theoretical-minimum",
+              "type": "book",
+              "title": "Quantum Mechanics: The Theoretical Minimum",
+              "author": "Leonard Susskind and Art Friedman",
+              "source": "Book",
+              "status": "queued",
+              "priority": "medium",
+              "tags": [
+                "physics",
+                "quantum-mechanics",
+                "theoretical-minimum",
+                "math"
+              ],
+              "thumbnail": "/static/images/quantum-mechanics-the-theoretical-minimum.jpg",
+              "thumbnailWidth": "8rem",
+              "summary": "Planned notes on quantum states, spin, measurement, linear algebra, entanglement, operators, and the mathematical structure of quantum mechanics.",
+              "updated": "2026-05-09",
+              "groups": [
+                {
+                  "id": "reading-plan",
+                  "title": "Reading plan",
+                  "kind": "log",
+                  "summary": "Initial structure for theoretical minimum quantum mechanics notes.",
+                  "blocks": [
+                    {
+                      "type": "bullets",
+                      "items": [
+                        "Track the mathematical objects and their physical interpretation together.",
+                        "Work through notation carefully, especially state vectors and operators.",
+                        "Collect derivations and examples that are worth redoing by hand or in code."
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "non-fiction",
+          "title": "Non-fiction",
+          "entries": [
+            {
+              "id": "thinking-fast-and-slow",
+              "type": "book",
+              "title": "Thinking, Fast and Slow",
+              "author": "Daniel Kahneman",
+              "source": "Book",
+              "status": "queued",
+              "priority": "medium",
+              "tags": [
+                "psychology",
+                "decision-making",
+                "behavioral-economics",
+                "non-fiction"
+              ],
+              "thumbnail": "/static/images/thinking-fast-and-slow.jpg",
+              "thumbnailWidth": "8rem",
+              "summary": "Planned notes on judgment, bias, decision-making, heuristics, and the distinction between fast intuitive thinking and slower analytical reasoning.",
+              "updated": "2026-05-09",
+              "groups": [
+                {
+                  "id": "reading-plan",
+                  "title": "Reading plan",
+                  "kind": "log",
+                  "summary": "Initial structure for decision-making notes.",
+                  "blocks": [
+                    {
+                      "type": "bullets",
+                      "items": [
+                        "Track the major cognitive biases and when they show up in technical judgment.",
+                        "Connect decision-making ideas to investing, engineering tradeoffs, and problem solving.",
+                        "Collect examples where intuition is useful, misleading, or needs verification."
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -296,7 +908,12 @@
           "source": "Personal investigation",
           "status": "unfinished",
           "priority": "high",
-          "tags": ["trading-infrastructure", "simulation", "cpp", "performance"],
+          "tags": [
+            "trading-infrastructure",
+            "simulation",
+            "cpp",
+            "performance"
+          ],
           "thumbnail": "/static/images/lob.jpg",
           "summary": "Notes toward a local simulation of order matching, queue priority, event replay, latency measurement, and performance tradeoffs.",
           "updated": "2026-05-08",
