@@ -290,6 +290,8 @@ time {
 }
 
 .problem-catalog {
+  display: grid;
+  gap: 1rem;
   margin-top: 1.5rem;
 }
 
@@ -318,12 +320,18 @@ time {
 .problem-platform-summary {
   padding: 1rem;
   font-size: 1.35rem;
+  line-height: 1.35;
 }
 
 .problem-platform-icon {
+  flex: 0 0 2rem;
   width: 2rem;
   height: 2rem;
   object-fit: contain;
+}
+
+.problem-platform-summary span {
+  min-width: 0;
 }
 
 .problem-platform-summary a {
