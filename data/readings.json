@@ -1,11 +1,58 @@
 {
   "sections": [
     {
+      "id": "papers",
+      "title": "Papers",
+      "description": "Paper notes, summaries, and implementation questions.",
+      "entries": [
+        {
+          "id": "mapreduce",
+          "type": "paper",
+          "title": "MapReduce: Simplified Data Processing on Large Clusters",
+          "url": "https://static.googleusercontent.com/media/research.google.com/en//archive/mapreduce-osdi04.pdf",
+          "author": "Jeffrey Dean and Sanjay Ghemawat",
+          "source": "OSDI 2004",
+          "status": "studying",
+          "priority": "medium",
+          "tags": ["distributed-systems", "fault-tolerance", "batch-processing"],
+          "thumbnail": "/static/images/map_reduce.png",
+          "summary": "A study of the programming model, runtime responsibilities, and why restricted abstractions can make distributed execution manageable.",
+          "updated": "2026-05-08",
+          "groups": [
+            {
+              "id": "core-model",
+              "title": "Core model",
+              "kind": "section",
+              "summary": "Map and reduce as a constrained interface for parallel execution.",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "content": "The interface pushes users toward deterministic transformations while the runtime handles scheduling, locality, failures, and coordination."
+                },
+                {
+                  "type": "equation",
+                  "content": "map(k1, v1) -> list(k2, v2); reduce(k2, list(v2)) -> list(v2)"
+                },
+                {
+                  "type": "quote",
+                  "content": "The useful design lesson is that a narrow API can create room for a powerful runtime."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "books",
       "title": "Books",
       "description": "Chapter-by-chapter notes from books on systems, engineering, and technical judgment.",
-      "entries": [
+      "subsections": [
         {
+          "id": "engineering",
+          "title": "Engineering",
+          "entries": [
+            {
           "id": "designing-data-intensive-applications",
           "type": "book",
           "title": "Designing Data-Intensive Applications",
@@ -221,49 +268,18 @@
               ]
             }
           ]
-        }
-      ]
-    },
-    {
-      "id": "papers",
-      "title": "Papers",
-      "description": "Paper notes, summaries, and implementation questions.",
-      "entries": [
-        {
-          "id": "mapreduce",
-          "type": "paper",
-          "title": "MapReduce: Simplified Data Processing on Large Clusters",
-          "url": "https://static.googleusercontent.com/media/research.google.com/en//archive/mapreduce-osdi04.pdf",
-          "author": "Jeffrey Dean and Sanjay Ghemawat",
-          "source": "OSDI 2004",
-          "status": "studying",
-          "priority": "medium",
-          "tags": ["distributed-systems", "fault-tolerance", "batch-processing"],
-          "thumbnail": "/static/images/map_reduce.png",
-          "summary": "A study of the programming model, runtime responsibilities, and why restricted abstractions can make distributed execution manageable.",
-          "updated": "2026-05-08",
-          "groups": [
-            {
-              "id": "core-model",
-              "title": "Core model",
-              "kind": "section",
-              "summary": "Map and reduce as a constrained interface for parallel execution.",
-              "blocks": [
-                {
-                  "type": "paragraph",
-                  "content": "The interface pushes users toward deterministic transformations while the runtime handles scheduling, locality, failures, and coordination."
-                },
-                {
-                  "type": "equation",
-                  "content": "map(k1, v1) -> list(k2, v2); reduce(k2, list(v2)) -> list(v2)"
-                },
-                {
-                  "type": "quote",
-                  "content": "The useful design lesson is that a narrow API can create room for a powerful runtime."
-                }
-              ]
             }
           ]
+        },
+        {
+          "id": "quant",
+          "title": "Quant",
+          "entries": []
+        },
+        {
+          "id": "machine-learning",
+          "title": "Machine Learning",
+          "entries": []
         }
       ]
     },

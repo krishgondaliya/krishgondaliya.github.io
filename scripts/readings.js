@@ -35,8 +35,18 @@
   function collectEntries(data) {
     if (!data || !Array.isArray(data.sections)) return [];
     return data.sections.reduce(function (entries, section) {
-      return entries.concat(Array.isArray(section.entries) ? section.entries : []);
+      return entries.concat(getSectionEntries(section));
     }, []);
+  }
+
+  function getSectionEntries(section) {
+    if (!section) return [];
+    if (Array.isArray(section.subsections)) {
+      return section.subsections.reduce(function (entries, subsection) {
+        return entries.concat(Array.isArray(subsection.entries) ? subsection.entries : []);
+      }, []);
+    }
+    return Array.isArray(section.entries) ? section.entries : [];
   }
 
   function entryMatches(entry) {
@@ -96,8 +106,8 @@
     var renderedAny = false;
 
     state.data.sections.forEach(function (section) {
-      var entries = (section.entries || []).filter(entryMatches);
-      if (!entries.length) return;
+      var entries = getSectionEntries(section).filter(entryMatches);
+      if (!entries.length && (!Array.isArray(section.subsections) || hasActiveFilters())) return;
 
       renderedAny = true;
       root.appendChild(renderSection(section, entries));
@@ -108,9 +118,13 @@
     }
   }
 
+  function hasActiveFilters() {
+    return Boolean(state.query) || state.status !== "all" || state.tag !== "all";
+  }
+
   function renderSection(section, entries) {
     var details = createElement("details", "readings-section");
-    details.open = true;
+    details.open = false;
 
     var summary = createElement("summary", "readings-section-summary");
     var titleWrap = createElement("span", "readings-section-title");
@@ -121,9 +135,38 @@
     details.appendChild(summary);
 
     var list = createElement("div", "readings-list");
-    entries.forEach(function (entry) {
-      list.appendChild(renderEntry(entry));
-    });
+    if (Array.isArray(section.subsections)) {
+      section.subsections.forEach(function (subsection) {
+        list.appendChild(renderSubsection(subsection));
+      });
+    } else {
+      entries.forEach(function (entry) {
+        list.appendChild(renderEntry(entry));
+      });
+    }
+    details.appendChild(list);
+
+    return details;
+  }
+
+  function renderSubsection(subsection) {
+    var entries = (subsection.entries || []).filter(entryMatches);
+    var details = createElement("details", "reading-subsection");
+    details.open = false;
+
+    var summary = createElement("summary", "reading-subsection-summary");
+    summary.appendChild(createElement("strong", null, subsection.title || "Untitled category"));
+    summary.appendChild(createElement("span", "readings-count", String(entries.length)));
+    details.appendChild(summary);
+
+    var list = createElement("div", "reading-subsection-list");
+    if (entries.length) {
+      entries.forEach(function (entry) {
+        list.appendChild(renderEntry(entry));
+      });
+    } else {
+      list.appendChild(createElement("p", "readings-state", "No readings yet."));
+    }
     details.appendChild(list);
 
     return details;
@@ -131,6 +174,7 @@
 
   function renderEntry(entry) {
     var details = createElement("details", "reading-entry");
+    details.open = false;
     var summary = createElement("summary", "reading-row");
     summary.appendChild(renderEntryTitle(entry));
     summary.appendChild(createElement("span", "reading-row-status", formatLabel(entry.status || "notes")));

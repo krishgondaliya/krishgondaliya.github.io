@@ -289,6 +289,85 @@ time {
   line-height: 1.1;
 }
 
+.problem-catalog {
+  margin-top: 1.5rem;
+}
+
+.problem-platform,
+.problem-subsection {
+  border: 1px solid var(--line);
+  border-radius: .5rem;
+  background: var(--panel);
+}
+
+.problem-platform-summary,
+.problem-subsection summary {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  cursor: pointer;
+  list-style: none;
+  font-weight: 750;
+}
+
+.problem-platform-summary::-webkit-details-marker,
+.problem-subsection summary::-webkit-details-marker {
+  display: none;
+}
+
+.problem-platform-summary {
+  padding: 1rem;
+  font-size: 1.35rem;
+}
+
+.problem-platform-icon {
+  width: 2rem;
+  height: 2rem;
+  object-fit: contain;
+}
+
+.problem-platform-summary a {
+  color: var(--accent);
+}
+
+.problem-platform-summary a:hover {
+  color: var(--accent-strong);
+}
+
+.problem-platform-body {
+  display: grid;
+  gap: .75rem;
+  padding: 0 1rem 1rem;
+}
+
+.problem-subsection {
+  background: var(--bg);
+}
+
+.problem-subsection summary {
+  padding: .85rem 1rem;
+}
+
+.problem-subsection p {
+  margin: 0;
+  padding: 0 1rem 1rem;
+  color: var(--muted);
+}
+
+.problem-link-list {
+  margin: 0;
+  padding: 0 1rem 1rem 2.25rem;
+}
+
+.problem-link-list a {
+  color: var(--accent);
+  font-weight: 650;
+}
+
+.problem-link-list a:hover {
+  color: var(--accent-strong);
+}
+
 .content-band {
   border-bottom: 1px solid var(--line);
 }
@@ -513,6 +592,7 @@ time {
 }
 
 .readings-section-summary,
+.reading-subsection-summary,
 .reading-row,
 .note-group-summary {
   cursor: pointer;
@@ -520,6 +600,7 @@ time {
 }
 
 .readings-section-summary::-webkit-details-marker,
+.reading-subsection-summary::-webkit-details-marker,
 .reading-row::-webkit-details-marker,
 .note-group-summary::-webkit-details-marker {
   display: none;
@@ -566,6 +647,30 @@ time {
 }
 
 .readings-list {
+  display: grid;
+  gap: .75rem;
+  padding: 1rem;
+}
+
+.reading-subsection {
+  border: 1px solid var(--line);
+  border-radius: .5rem;
+  background: var(--bg);
+}
+
+.reading-subsection-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .85rem 1rem;
+}
+
+.reading-subsection[open] > .reading-subsection-summary {
+  border-bottom: 1px solid var(--line);
+}
+
+.reading-subsection-list {
   display: grid;
   gap: .75rem;
   padding: 1rem;
