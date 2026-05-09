@@ -289,6 +289,14 @@ time {
   line-height: 1.1;
 }
 
+.page-blog .page-title,
+.page-readings .page-title,
+.page-problem-solving .page-title,
+.page-puzzles .page-title,
+.page-projects .page-title {
+  font-size: clamp(1.65rem, 3.5vw, 2.35rem);
+}
+
 .problem-catalog {
   display: grid;
   gap: 1rem;
@@ -319,7 +327,7 @@ time {
 
 .problem-platform-summary {
   padding: 1rem;
-  font-size: 1.35rem;
+  font-size: 1.05rem;
   line-height: 1.35;
 }
 
@@ -354,12 +362,14 @@ time {
 
 .problem-subsection summary {
   padding: .85rem 1rem;
+  font-size: .98rem;
 }
 
 .problem-subsection p {
   margin: 0;
   padding: 0 1rem 1rem;
   color: var(--muted);
+  font-size: .95rem;
 }
 
 .problem-link-list {
@@ -369,6 +379,7 @@ time {
 
 .problem-link-list a {
   color: var(--accent);
+  font-size: .95rem;
   font-weight: 650;
 }
 
