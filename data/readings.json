@@ -158,7 +158,7 @@
               "title": "Operating Systems: Three Easy Pieces",
               "author": "Remzi H. Arpaci-Dusseau and Andrea C. Arpaci-Dusseau",
               "source": "Book",
-              "status": "queued",
+              "status": "reading",
               "priority": "high",
               "tags": [
                 "operating-systems",
@@ -169,21 +169,82 @@
               "thumbnail": "/static/images/ostep2.jpg",
               "thumbnailWidth": "8rem",
               "summary": "Planned notes on virtualization, concurrency, persistence, scheduling, memory management, file systems, and the OS abstractions that shape systems programming.",
-              "updated": "2026-05-08",
+              "updated": "2026-05-12",
               "groups": [
                 {
-                  "id": "reading-plan",
-                  "title": "Reading plan",
-                  "kind": "log",
-                  "summary": "Initial structure for chapter-wise operating systems notes.",
+                  "id": "chapter-4-process-abstraction",
+                  "title": "Chapter 4: The Abstraction: The Process",
+                  "kind": "chapter",
+                  "summary": "Notes on the process abstraction and how an operating system presents a running program.",
                   "blocks": [
+                    {
+                      "type": "paragraph",
+                      "content": "This chapter introduces the process as the central abstraction for a running program. The operating system gives each process the illusion that it owns the CPU and memory while managing the real machine underneath."
+                    },
                     {
                       "type": "bullets",
                       "items": [
-                        "Track the three central themes: virtualization, concurrency, and persistence.",
-                        "Connect each chapter to C/C++ systems programming behavior.",
-                        "Write small experiments for scheduling, memory allocation, synchronization, and file-system behavior."
+                        "A process is a program in execution, including its address space, registers, program counter, stack, heap, and open resources.",
+                        "The OS creates the illusion of many CPUs through time sharing.",
+                        "Process state matters because the OS must save and restore enough context to pause and resume execution."
                       ]
+                    },
+                    {
+                      "type": "callout",
+                      "title": "4.1 Checkpoint Questions",
+                      "content": "Section 4.1 checkpoint: after completing this part of the chapter, I should be able to answer these questions without looking back at the text."
+                    },
+                    {
+                      "type": "bullets",
+                      "items": [
+                        "How does the operating system provide the illusion that it has more resources than it actually does? Through virtualization. The OS multiplexes physical resources such as the CPU and memory across processes, using mechanisms like time sharing, context switching, scheduling, and memory management so each process appears to have its own machine.",
+                        "What is time sharing? Time sharing is the technique of rapidly switching a physical resource, especially the CPU, among multiple processes over time. Each process gets a slice of execution, creating the illusion that many programs are running at once.",
+                        "What is a process? A process is a running program plus its execution state: its address space, code, data, heap, stack, registers, program counter, and OS-managed resources.",
+                        "Where is the currently executing instruction of the process stored? The location of the currently executing, or next-to-execute, instruction is stored in the instruction pointer, also called the program counter.",
+                        "What is a stack pointer? The stack pointer is a CPU register that points to the current top of the process stack. It changes as functions push data, allocate local variables, call other functions, and return.",
+                        "What is a frame pointer? The frame pointer is a CPU register that points to a stable location within the current function's stack frame. It helps locate function arguments, saved registers, and local variables even while the stack pointer moves.",
+                        "How do the instruction pointer, stack pointer, and frame pointer differ? The instruction pointer tracks where execution is in the program, the stack pointer tracks the current top of the stack, and the frame pointer anchors the current function's stack frame so its data can be addressed consistently."
+                      ]
+                    },
+                    {
+                      "type": "callout",
+                      "title": "4.2: Process API",
+                      "content": "A process API is the interface the operating system exposes so programs can create and manage processes. It gives user programs controlled ways to start new execution, stop execution, wait for completion, and sometimes inspect or change process behavior."
+                    },
+                    {
+                      "type": "bullets",
+                      "items": [
+                        "Create: APIs such as fork() or spawn-style calls create a new process. In Unix, fork() creates a child process by copying the calling process abstraction.",
+                        "Execute: APIs such as exec() replace the current process image with a different program, letting a child process run new code after it is created.",
+                        "Destroy: APIs such as exit(), kill(), or terminate-style calls end a process, either voluntarily or through another process/OS request.",
+                        "Wait: APIs such as wait() or waitpid() let a parent process wait for a child process to finish and collect its exit status.",
+                        "Control and inspect: operating systems often provide APIs for signals, priorities, process IDs, resource usage, and process state so programs can coordinate with or observe processes."
+                      ]
+                    },
+                    {
+                      "type": "callout",
+                      "title": "4.2 POSIX Threads note",
+                      "content": "pthread_create() starts a new POSIX thread by specifying attributes, the function to run, and the argument passed to that function. pthread_join() waits for a thread to terminate and can collect its return value. If a joinable thread exits and no other thread calls pthread_join() on it, resources such as its stack and thread control block can remain allocated, creating a zombie thread and causing leaks in long-running programs."
+                    },
+                    {
+                      "type": "callout",
+                      "title": "4.4: Process States",
+                      "content": "A process moves between states as the OS manages execution. A ready process is able to run but is waiting for the CPU. A running process is currently executing. A blocked process is waiting for an event such as I/O. When the scheduler chooses a ready process to run, it is scheduled. When the OS stops a running process and moves it off the CPU, it is descheduled."
+                    },
+                    {
+                      "type": "callout",
+                      "title": "4.5: Data Structures",
+                      "content": "The OS tracks each process with kernel data structures. A common example is a process list or process table containing all known processes, including those that are ready, blocked, or running. These structures store information such as process state, PID, memory information, open files, saved registers, and which process is currently running."
+                    },
+                    {
+                      "type": "code",
+                      "language": "c",
+                      "content": "struct proc {\n    char *mem;              // Start of process memory\n    uint sz;                // Size of process memory\n    int pid;                // Process ID\n    struct proc *parent;    // Parent process\n    int killed;             // If non-zero, has been killed\n    char* ustack;           // Bottom of the stack\n    struct file *ofile[NOFILE]; // Open files\n    struct trapframe *tf;   // Trap frame for the current interrupt\n    // ...\n};"
+                    },
+                    {
+                      "type": "callout",
+                      "title": "Process structure checkpoint",
+                      "content": "The field that does not belong is ustack. In the xv6-style process structure, the OS tracks a kernel stack pointer such as kstack, which points to the bottom of the kernel stack for the process. There is no ustack pointer in this process data structure."
                     }
                   ]
                 }
@@ -269,7 +330,7 @@
               "title": "Inside the Machine",
               "author": "Jon Stokes",
               "source": "Book",
-              "status": "queued",
+              "status": "reading",
               "priority": "medium",
               "tags": [
                 "computer-architecture",
@@ -280,7 +341,7 @@
               "thumbnail": "/static/images/inside-the-machine.jpg",
               "thumbnailWidth": "8rem",
               "summary": "Planned notes on computer architecture, processor design, instruction execution, pipelines, memory hierarchy, and how hardware shapes software performance.",
-              "updated": "2026-05-08",
+              "updated": "2026-05-12",
               "groups": [
                 {
                   "id": "reading-plan",
@@ -294,6 +355,70 @@
                         "Track how processor architecture affects real software performance.",
                         "Connect pipeline, cache, and execution concepts to C/C++ performance work.",
                         "Collect diagrams and examples that clarify how instructions move through hardware."
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "chapter-11-caching-and-performance",
+                  "title": "Chapter 11: Understanding Caching and Performance",
+                  "kind": "chapter",
+                  "summary": "Notes on caching, locality, and how memory hierarchy affects performance.",
+                  "blocks": [
+                    {
+                      "type": "callout",
+                      "title": "Caching basics",
+                      "content": "Caching exists because CPUs consume data faster than RAM and disks can produce it, so small fast memories near the CPU keep likely-needed code and data close enough to avoid long stalls."
+                    },
+                    {
+                      "type": "bullets",
+                      "items": [
+                        "The memory hierarchy moves from smallest/fastest/most expensive near the CPU to largest/slowest/cheapest farther away: registers, L1 cache, L2 cache, main memory, then disk/page file.",
+                        "Each upper level usually holds a subset of the level below it; on a cache miss, the request falls downward until the data is found, then a cache line is copied back upward.",
+                        "Average read latencies from the reading: registers 1-3 ns, L1 cache 2-8 ns, L2 cache 5-12 ns, main memory 10-60 ns, hard disk 3,000,000-10,000,000 ns.",
+                        "The key performance idea is locality: if recently or nearby used data is requested again, a cache hit lets the CPU avoid waiting on much slower memory levels."
+                      ]
+                    },
+                    {
+                      "type": "callout",
+                      "title": "Question focus",
+                      "content": "The hierarchy is a speed/capacity tradeoff: as storage gets closer to the CPU it gets faster and smaller, and as it gets farther away it gets larger and dramatically slower."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "art-of-writing-efficient-programs",
+              "type": "book",
+              "title": "The Art of Writing Efficient Programs",
+              "author": "Fedor Pikus",
+              "source": "Book",
+              "status": "queued",
+              "priority": "high",
+              "tags": [
+                "cpp",
+                "performance",
+                "optimization",
+                "systems"
+              ],
+              "thumbnail": "/static/images/art-of-writing-Efficient-Programs.jpg",
+              "thumbnailWidth": "8rem",
+              "summary": "Planned notes on performance engineering, efficient C++ design, benchmarking, concurrency, memory behavior, and optimization techniques that matter in real systems.",
+              "updated": "2026-05-17",
+              "groups": [
+                {
+                  "id": "reading-plan",
+                  "title": "Reading plan",
+                  "kind": "log",
+                  "summary": "Initial structure for efficient programming notes.",
+                  "blocks": [
+                    {
+                      "type": "bullets",
+                      "items": [
+                        "Track measurement-first performance work instead of guessing.",
+                        "Connect C++ language choices to hardware behavior, memory layout, and concurrency costs.",
+                        "Collect patterns that apply to latency-sensitive and systems-level code."
                       ]
                     }
                   ]
