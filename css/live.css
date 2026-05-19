@@ -540,6 +540,19 @@ time {
   height: 1.12rem;
 }
 
+.icon-link img {
+  width: 1.12rem;
+  height: 1.12rem;
+  object-fit: contain;
+}
+
+.coding-profiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .9rem;
+  margin-top: 1.25rem;
+}
+
 .about-copy h2 {
   margin: 0 0 1rem;
   font-size: 1.5rem;
