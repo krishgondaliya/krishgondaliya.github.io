@@ -387,6 +387,74 @@ time {
   color: var(--accent-strong);
 }
 
+.puzzle-catalog {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.puzzle-platform,
+.puzzle-subsection {
+  border: 1px solid var(--line);
+  border-radius: .5rem;
+  background: var(--panel);
+}
+
+.puzzle-platform-summary,
+.puzzle-subsection summary {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  cursor: pointer;
+  list-style: none;
+  font-weight: 750;
+}
+
+.puzzle-platform-summary::-webkit-details-marker,
+.puzzle-subsection summary::-webkit-details-marker {
+  display: none;
+}
+
+.puzzle-platform-summary {
+  padding: 1rem;
+  font-size: 1.05rem;
+  line-height: 1.35;
+}
+
+.puzzle-platform-body {
+  display: grid;
+  gap: .75rem;
+  padding: 0 1rem 1rem;
+}
+
+.puzzle-subsection {
+  background: var(--bg);
+}
+
+.puzzle-subsection summary {
+  padding: .85rem 1rem;
+  font-size: .98rem;
+}
+
+.puzzle-subsection a {
+  color: var(--accent);
+}
+
+.puzzle-subsection a:hover {
+  color: var(--accent-strong);
+}
+
+.puzzle-solution {
+  margin: 0 1rem 1rem;
+}
+
+.puzzle-subsection p {
+  margin: 0;
+  padding: 0 1rem 1rem;
+  color: var(--muted);
+  font-size: .95rem;
+}
+
 .content-band {
   border-bottom: 1px solid var(--line);
 }
