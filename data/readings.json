@@ -76,7 +76,7 @@
               "title": "The Algorithm Design Manual",
               "author": "Steven S. Skiena",
               "source": "Book",
-              "status": "queued",
+              "status": "reading",
               "priority": "high",
               "tags": [
                 "algorithms",
@@ -209,7 +209,7 @@
               "title": "C++ Concurrency in Action",
               "author": "Anthony Williams",
               "source": "Book",
-              "status": "queued",
+              "status": "reading",
               "priority": "high",
               "tags": [
                 "cpp",
@@ -246,7 +246,7 @@
               "title": "TCP/IP Illustrated, Volume 1",
               "author": "W. Richard Stevens",
               "source": "Book",
-              "status": "queued",
+              "status": "reading",
               "priority": "high",
               "tags": [
                 "networking",
@@ -378,7 +378,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "hidden": false
         },
         {
           "id": "quant",
@@ -390,7 +391,7 @@
               "title": "Option Volatility and Pricing",
               "author": "Sheldon Natenberg",
               "source": "Book",
-              "status": "queued",
+              "status": "reading",
               "priority": "high",
               "tags": [
                 "quant",
@@ -427,7 +428,7 @@
               "title": "Trading and Exchanges",
               "author": "Larry Harris",
               "source": "Book",
-              "status": "queued",
+              "status": "reading",
               "priority": "high",
               "tags": [
                 "quant",
@@ -464,7 +465,7 @@
               "title": "Heard on the Street",
               "author": "Timothy Falcon Crack",
               "source": "Book",
-              "status": "queued",
+              "status": "reading",
               "priority": "high",
               "tags": [
                 "quant",
@@ -501,7 +502,7 @@
               "title": "Green Book: A Practical Guide to Quantitative Finance Interviews",
               "author": "Xinfeng Zhou",
               "source": "Book",
-              "status": "queued",
+              "status": "reading",
               "priority": "high",
               "tags": [
                 "quant",
@@ -532,7 +533,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "hidden": true
         },
         {
           "id": "machine-learning",
@@ -544,7 +546,7 @@
               "title": "Hands-On Machine Learning with Scikit-Learn, Keras, & TensorFlow",
               "author": "Aurelien Geron",
               "source": "Book",
-              "status": "queued",
+              "status": "reading",
               "priority": "high",
               "tags": [
                 "machine-learning",
@@ -581,7 +583,7 @@
               "title": "The Hundred-Page Machine Learning Book",
               "author": "Andriy Burkov",
               "source": "Book",
-              "status": "queued",
+              "status": "reading",
               "priority": "medium",
               "tags": [
                 "machine-learning",
@@ -612,7 +614,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "hidden": true
         },
         {
           "id": "probability-and-statistics",
@@ -624,7 +627,7 @@
               "title": "Introduction to Probability",
               "author": "Dimitri P. Bertsekas and John N. Tsitsiklis",
               "source": "Book",
-              "status": "queued",
+              "status": "reading",
               "priority": "high",
               "tags": [
                 "probability",
@@ -661,7 +664,7 @@
               "title": "The Elements of Statistical Learning",
               "author": "Trevor Hastie, Robert Tibshirani, and Jerome Friedman",
               "source": "Book",
-              "status": "queued",
+              "status": "reading",
               "priority": "high",
               "tags": [
                 "statistics",
@@ -698,7 +701,7 @@
               "title": "Fifty Challenging Problems in Probability",
               "author": "Frederick Mosteller",
               "source": "Book",
-              "status": "queued",
+              "status": "reading",
               "priority": "high",
               "tags": [
                 "probability",
@@ -729,7 +732,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "hidden": true
         },
         {
           "id": "game-theory",
@@ -741,7 +745,7 @@
               "title": "Game Theory: An Introduction",
               "author": "Steven Tadelis",
               "source": "Book",
-              "status": "queued",
+              "status": "reading",
               "priority": "high",
               "tags": [
                 "game-theory",
@@ -772,7 +776,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "hidden": true
         },
         {
           "id": "physics",
@@ -784,7 +789,7 @@
               "title": "Six Easy Pieces",
               "author": "Richard P. Feynman",
               "source": "Book",
-              "status": "queued",
+              "status": "reading",
               "priority": "medium",
               "tags": [
                 "physics",
@@ -821,7 +826,7 @@
               "title": "Six Not-So-Easy Pieces",
               "author": "Richard P. Feynman",
               "source": "Book",
-              "status": "queued",
+              "status": "reading",
               "priority": "medium",
               "tags": [
                 "physics",
@@ -858,7 +863,7 @@
               "title": "QED: The Strange Theory of Light and Matter",
               "author": "Richard P. Feynman",
               "source": "Book",
-              "status": "queued",
+              "status": "reading",
               "priority": "medium",
               "tags": [
                 "physics",
@@ -895,7 +900,7 @@
               "title": "Quantum Mechanics: The Theoretical Minimum",
               "author": "Leonard Susskind and Art Friedman",
               "source": "Book",
-              "status": "queued",
+              "status": "reading",
               "priority": "medium",
               "tags": [
                 "physics",
@@ -926,7 +931,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "hidden": true
         },
         {
           "id": "non-fiction",
@@ -938,7 +944,7 @@
               "title": "Thinking, Fast and Slow",
               "author": "Daniel Kahneman",
               "source": "Book",
-              "status": "queued",
+              "status": "reading",
               "priority": "medium",
               "tags": [
                 "psychology",
@@ -969,9 +975,11 @@
                 }
               ]
             }
-          ]
+          ],
+          "hidden": true
         }
-      ]
+      ],
+      "hidden": false
     },
     {
       "id": "papers",
@@ -1018,7 +1026,8 @@
             }
           ]
         }
-      ]
+      ],
+      "hidden": true
     },
     {
       "id": "investigations",
@@ -1071,7 +1080,8 @@
             }
           ]
         }
-      ]
+      ],
+      "hidden": true
     }
   ]
 }

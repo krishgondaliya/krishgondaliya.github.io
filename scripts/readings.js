@@ -35,6 +35,7 @@
   function collectEntries(data) {
     if (!data || !Array.isArray(data.sections)) return [];
     return data.sections.reduce(function (entries, section) {
+      if (section.hidden) return entries;
       return entries.concat(getSectionEntries(section));
     }, []);
   }
@@ -43,6 +44,7 @@
     if (!section) return [];
     if (Array.isArray(section.subsections)) {
       return section.subsections.reduce(function (entries, subsection) {
+        if (subsection.hidden) return entries;
         return entries.concat(Array.isArray(subsection.entries) ? subsection.entries : []);
       }, []);
     }
@@ -105,7 +107,9 @@
 
     var renderedAny = false;
 
-    state.data.sections.forEach(function (section) {
+    state.data.sections.filter(function (section) {
+      return !section.hidden;
+    }).forEach(function (section) {
       var entries = getSectionEntries(section).filter(entryMatches);
       if (!entries.length && (!Array.isArray(section.subsections) || hasActiveFilters())) return;
 
@@ -136,7 +140,9 @@
 
     var list = createElement("div", "readings-list");
     if (Array.isArray(section.subsections)) {
-      section.subsections.forEach(function (subsection) {
+      section.subsections.filter(function (subsection) {
+        return !subsection.hidden;
+      }).forEach(function (subsection) {
         list.appendChild(renderSubsection(subsection));
       });
     } else {
