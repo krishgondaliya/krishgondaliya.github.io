@@ -10,102 +10,6 @@
           "title": "Engineering",
           "entries": [
             {
-              "id": "designing-data-intensive-applications",
-              "type": "book",
-              "title": "Designing Data-Intensive Applications",
-              "author": "Martin Kleppmann",
-              "source": "Book",
-              "status": "reading",
-              "priority": "high",
-              "tags": [
-                "distributed-systems",
-                "databases",
-                "reliability"
-              ],
-              "thumbnail": "/static/images/ddia.jpg",
-              "summary": "Working notes on reliability, scalability, maintainability, replication, partitioning, and the tradeoffs behind data systems.",
-              "updated": "2026-05-08",
-              "groups": [
-                {
-                  "id": "chapter-1",
-                  "title": "Chapter 1: Reliable, Scalable, and Maintainable Applications",
-                  "kind": "chapter",
-                  "summary": "A vocabulary for judging systems beyond whether they simply work.",
-                  "blocks": [
-                    {
-                      "type": "paragraph",
-                      "content": "The chapter frames engineering quality around reliability, scalability, and maintainability. I want these notes to track not only definitions, but also where those ideas show up in real infrastructure."
-                    },
-                    {
-                      "type": "bullets",
-                      "items": [
-                        "Reliability is about continuing to work correctly when faults happen.",
-                        "Scalability is a question about how load changes the shape of a system.",
-                        "Maintainability depends heavily on operability, simplicity, and evolvability."
-                      ]
-                    },
-                    {
-                      "type": "callout",
-                      "title": "Question to revisit",
-                      "content": "What failure modes would appear first in a small trading-data ingestion pipeline: throughput, latency variance, observability, or schema drift?"
-                    }
-                  ]
-                },
-                {
-                  "id": "chapter-2",
-                  "title": "Chapter 2: Data Models and Query Languages",
-                  "kind": "chapter",
-                  "summary": "Notes on how data models shape the questions a system can answer naturally.",
-                  "blocks": [
-                    {
-                      "type": "paragraph",
-                      "content": "The important idea is that data models are not passive containers. They influence the abstractions, performance assumptions, and failure boundaries of the system."
-                    },
-                    {
-                      "type": "code",
-                      "language": "sql",
-                      "content": "SELECT symbol, max(price)\nFROM ticks\nWHERE ts >= now() - interval '1 minute'\nGROUP BY symbol;"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "the-algorithm-design-manual",
-              "type": "book",
-              "title": "The Algorithm Design Manual",
-              "author": "Steven S. Skiena",
-              "source": "Book",
-              "status": "reading",
-              "priority": "high",
-              "tags": [
-                "algorithms",
-                "data-structures",
-                "problem-solving"
-              ],
-              "thumbnail": "/static/images/algorithms-2.jpg",
-              "summary": "Planned notes on algorithm design patterns, data structures, graph algorithms, combinatorial search, dynamic programming, and practical problem-solving heuristics.",
-              "updated": "2026-05-08",
-              "groups": [
-                {
-                  "id": "reading-plan",
-                  "title": "Reading plan",
-                  "kind": "log",
-                  "summary": "Initial queue for chapter-wise notes.",
-                  "blocks": [
-                    {
-                      "type": "bullets",
-                      "items": [
-                        "Track core design techniques and the problems they naturally solve.",
-                        "Write down implementation patterns worth reusing in C++.",
-                        "Collect examples where the right data structure changes the whole solution."
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
               "id": "operating-systems-three-easy-pieces",
               "type": "book",
               "title": "Operating Systems: Three Easy Pieces",
@@ -528,37 +432,61 @@
               ]
             },
             {
-              "id": "cpp-concurrency-in-action",
+              "id": "designing-data-intensive-applications",
               "type": "book",
-              "title": "C++ Concurrency in Action",
-              "author": "Anthony Williams",
+              "title": "Designing Data-Intensive Applications",
+              "author": "Martin Kleppmann",
               "source": "Book",
               "status": "reading",
               "priority": "high",
               "tags": [
-                "cpp",
-                "concurrency",
-                "systems",
-                "performance"
+                "distributed-systems",
+                "databases",
+                "reliability"
               ],
-              "thumbnail": "/static/images/c++-concurrency-in-action.jpg",
-              "thumbnailWidth": "8rem",
-              "summary": "Planned notes on the C++ concurrency model, threads, synchronization, atomics, lock-free design, futures, and practical patterns for safe parallel systems.",
+              "thumbnail": "/static/images/ddia.jpg",
+              "summary": "Working notes on reliability, scalability, maintainability, replication, partitioning, and the tradeoffs behind data systems.",
               "updated": "2026-05-08",
               "groups": [
                 {
-                  "id": "reading-plan",
-                  "title": "Reading plan",
-                  "kind": "log",
-                  "summary": "Initial structure for concurrency notes and implementation experiments.",
+                  "id": "chapter-1",
+                  "title": "Chapter 1: Reliable, Scalable, and Maintainable Applications",
+                  "kind": "chapter",
+                  "summary": "A vocabulary for judging systems beyond whether they simply work.",
                   "blocks": [
+                    {
+                      "type": "paragraph",
+                      "content": "The chapter frames engineering quality around reliability, scalability, and maintainability. I want these notes to track not only definitions, but also where those ideas show up in real infrastructure."
+                    },
                     {
                       "type": "bullets",
                       "items": [
-                        "Track the difference between language-level guarantees and operating-system scheduling behavior.",
-                        "Write small experiments for mutexes, condition variables, atomics, memory ordering, and futures.",
-                        "Collect patterns that are useful for latency-sensitive C++ systems."
+                        "Reliability is about continuing to work correctly when faults happen.",
+                        "Scalability is a question about how load changes the shape of a system.",
+                        "Maintainability depends heavily on operability, simplicity, and evolvability."
                       ]
+                    },
+                    {
+                      "type": "callout",
+                      "title": "Question to revisit",
+                      "content": "What failure modes would appear first in a small trading-data ingestion pipeline: throughput, latency variance, observability, or schema drift?"
+                    }
+                  ]
+                },
+                {
+                  "id": "chapter-2",
+                  "title": "Chapter 2: Data Models and Query Languages",
+                  "kind": "chapter",
+                  "summary": "Notes on how data models shape the questions a system can answer naturally.",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "content": "The important idea is that data models are not passive containers. They influence the abstractions, performance assumptions, and failure boundaries of the system."
+                    },
+                    {
+                      "type": "code",
+                      "language": "sql",
+                      "content": "SELECT symbol, max(price)\nFROM ticks\nWHERE ts >= now() - interval '1 minute'\nGROUP BY symbol;"
                     }
                   ]
                 }
@@ -660,6 +588,78 @@
                       "type": "callout",
                       "title": "Question focus",
                       "content": "The hierarchy is a speed/capacity tradeoff: as storage gets closer to the CPU it gets faster and smaller, and as it gets farther away it gets larger and dramatically slower."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "cpp-concurrency-in-action",
+              "type": "book",
+              "title": "C++ Concurrency in Action",
+              "author": "Anthony Williams",
+              "source": "Book",
+              "status": "reading",
+              "priority": "high",
+              "tags": [
+                "cpp",
+                "concurrency",
+                "systems",
+                "performance"
+              ],
+              "thumbnail": "/static/images/c++-concurrency-in-action.jpg",
+              "thumbnailWidth": "8rem",
+              "summary": "Planned notes on the C++ concurrency model, threads, synchronization, atomics, lock-free design, futures, and practical patterns for safe parallel systems.",
+              "updated": "2026-05-08",
+              "groups": [
+                {
+                  "id": "reading-plan",
+                  "title": "Reading plan",
+                  "kind": "log",
+                  "summary": "Initial structure for concurrency notes and implementation experiments.",
+                  "blocks": [
+                    {
+                      "type": "bullets",
+                      "items": [
+                        "Track the difference between language-level guarantees and operating-system scheduling behavior.",
+                        "Write small experiments for mutexes, condition variables, atomics, memory ordering, and futures.",
+                        "Collect patterns that are useful for latency-sensitive C++ systems."
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "the-algorithm-design-manual",
+              "type": "book",
+              "title": "The Algorithm Design Manual",
+              "author": "Steven S. Skiena",
+              "source": "Book",
+              "status": "reading",
+              "priority": "high",
+              "tags": [
+                "algorithms",
+                "data-structures",
+                "problem-solving"
+              ],
+              "thumbnail": "/static/images/algorithms-2.jpg",
+              "summary": "Planned notes on algorithm design patterns, data structures, graph algorithms, combinatorial search, dynamic programming, and practical problem-solving heuristics.",
+              "updated": "2026-05-08",
+              "groups": [
+                {
+                  "id": "reading-plan",
+                  "title": "Reading plan",
+                  "kind": "log",
+                  "summary": "Initial queue for chapter-wise notes.",
+                  "blocks": [
+                    {
+                      "type": "bullets",
+                      "items": [
+                        "Track core design techniques and the problems they naturally solve.",
+                        "Write down implementation patterns worth reusing in C++.",
+                        "Collect examples where the right data structure changes the whole solution."
+                      ]
                     }
                   ]
                 }
