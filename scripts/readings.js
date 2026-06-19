@@ -320,6 +320,8 @@
         return renderVideo(block);
       case "embed":
         return renderEmbed(block);
+      case "section":
+        return renderNoteSection(block);
       case "callout":
         return renderCallout(block);
       case "quote":
@@ -400,6 +402,27 @@
     if (block.title) callout.appendChild(createElement("strong", null, block.title));
     callout.appendChild(createElement("p", null, block.content || ""));
     return callout;
+  }
+
+  function renderNoteSection(block) {
+    var details = createElement("details", "note-block note-section");
+    details.open = false;
+
+    var summary = createElement("summary", "note-section-summary");
+    summary.appendChild(createElement("strong", null, block.title || "Section"));
+    details.appendChild(summary);
+
+    if (block.summary) {
+      details.appendChild(createElement("p", "note-group-description", block.summary));
+    }
+
+    var blocks = createElement("div", "note-blocks");
+    (block.blocks || []).forEach(function (childBlock) {
+      blocks.appendChild(renderBlock(childBlock));
+    });
+    details.appendChild(blocks);
+
+    return details;
   }
 
   function renderSimulation(block) {

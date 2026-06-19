@@ -200,6 +200,330 @@
                       "content": "The field that does not belong is ustack. In the xv6-style process structure, the OS tracks a kernel stack pointer such as kstack, which points to the bottom of the kernel stack for the process. There is no ustack pointer in this process data structure."
                     }
                   ]
+                },
+                {
+                  "id": "chapter-6-limited-direct-execution",
+                  "title": "Chapter 6: Mechanism: Limited Direct Execution",
+                  "kind": "chapter",
+                  "summary": "Notes on how the OS lets programs run directly on the CPU while still preserving control, safety, and time sharing.",
+                  "blocks": [
+                    {
+                      "type": "section",
+                      "title": "Section 6.1",
+                      "summary": "Basic technique: limited direct execution.",
+                      "blocks": [
+                        {
+                          "type": "callout",
+                          "title": "6.1 Basic Technique: Limited Direct Execution",
+                          "content": "Limited direct execution is the OS technique of letting a program run directly on the CPU for speed, while placing limits on what it can do so the OS keeps control."
+                        },
+                        {
+                          "type": "bullets",
+                          "items": [
+                            "Core tradeoff: direct execution gives performance because the program runs on hardware instead of being interpreted by the OS.",
+                            "The limited part preserves control: the OS can restrict unsafe operations, regain the CPU, and switch between processes.",
+                            "Without limits, the OS would lose authority and become little more than a library called by user programs."
+                          ]
+                        },
+                        {
+                          "type": "callout",
+                          "title": "Direct execution",
+                          "content": "Direct execution means the OS prepares a program, jumps to its entry point, lets the CPU execute its instructions directly, and then regains control when the program exits or traps."
+                        },
+                        {
+                          "type": "bullets",
+                          "items": [
+                            "Basic flow: create the process, load the executable, set up memory and registers, jump to the entry point, run the program, then clean up when it finishes.",
+                            "This is fast because the program is not simulated by the OS; it is executing real CPU instructions."
+                          ]
+                        },
+                        {
+                          "type": "callout",
+                          "title": "Why limits are needed",
+                          "content": "A program running directly on the CPU needs restrictions because it could otherwise access memory it does not own, modify OS data, touch private files, control hardware, or run forever without giving the CPU back."
+                        },
+                        {
+                          "type": "bullets",
+                          "items": [
+                            "Safety problem: user programs must not be able to perform privileged operations freely.",
+                            "Time-sharing problem: the OS must be able to stop one process and run another so multitasking works.",
+                            "CPU virtualization depends on solving both problems: run programs quickly, but never give them unlimited power."
+                          ]
+                        },
+                        {
+                          "type": "callout",
+                          "title": "Where the OS lives",
+                          "content": "The OS is stored persistently on disk, but at runtime the kernel is loaded into RAM and remains in a protected memory region that user programs cannot freely read or modify."
+                        },
+                        {
+                          "type": "bullets",
+                          "items": [
+                            "Program files also come from disk, but before execution the OS loads the relevant code and data into memory.",
+                            "At runtime, both the kernel and user programs are in memory, but protection separates kernel memory from user memory."
+                          ]
+                        },
+                        {
+                          "type": "callout",
+                          "title": "Before execution",
+                          "content": "Before a program starts, the OS builds the process abstraction and prepares the machine state needed for execution."
+                        },
+                        {
+                          "type": "bullets",
+                          "items": [
+                            "Create a process entry in the process list.",
+                            "Allocate memory for code, data, heap, and stack.",
+                            "Load the executable from disk into RAM.",
+                            "Set up the stack with startup arguments such as argc and argv.",
+                            "Initialize or clear CPU registers for the new process.",
+                            "Jump to the program entry point, usually the path that leads to main()."
+                          ]
+                        },
+                        {
+                          "type": "callout",
+                          "title": "While running",
+                          "content": "From the program's perspective, it appears to own the CPU, but the OS keeps mechanisms in place to interrupt it, restrict privileged behavior, and switch to another process."
+                        },
+                        {
+                          "type": "callout",
+                          "title": "After completion",
+                          "content": "When the program exits, control returns to the OS, which frees the process memory, removes the process from the process list, and schedules another process if needed."
+                        },
+                        {
+                          "type": "callout",
+                          "title": "Key takeaway",
+                          "content": "Limited direct execution is the foundation of CPU virtualization: programs run directly for performance, but the OS uses protection and control mechanisms so they cannot run with unlimited authority."
+                        }
+                      ]
+                    },
+                    {
+                      "type": "section",
+                      "title": "Section 6.2, 6.3, 6.5",
+                      "summary": "Restricted operations, switching between processes, context switching, and the limited direct execution summary.",
+                      "blocks": [
+                        {
+                          "type": "callout",
+                          "title": "6.5 Summary: Limited Direct Execution Notes",
+                          "content": "Limited direct execution means: run the user program directly on the CPU for speed, but use hardware and OS mechanisms to limit what it can do."
+                        },
+                        {
+                          "type": "callout",
+                          "title": "Big Idea",
+                          "content": "The OS \"baby proofs\" the CPU by setting up trap handlers, enabling timer interrupts, and running user programs in restricted mode."
+                        },
+                        {
+                          "type": "callout",
+                          "title": "Main Issues With Limited Direct Execution",
+                          "content": "There are two big problems: restricted operations and switching between processes."
+                        },
+                        {
+                          "type": "callout",
+                          "title": "1. Restricted operations",
+                          "content": "A program sometimes needs to do privileged work, but the OS cannot let user programs directly control hardware."
+                        },
+                        {
+                          "type": "bullets",
+                          "items": [
+                            "Read or write files",
+                            "Access the disk",
+                            "Allocate more memory",
+                            "Create or destroy processes",
+                            "Communicate with other processes"
+                          ]
+                        },
+                        {
+                          "type": "callout",
+                          "title": "2. Switching between processes",
+                          "content": "If a process is running on the CPU, the OS is not running. So the question is: how does the OS regain control of the CPU and switch to another process?"
+                        },
+                        {
+                          "type": "callout",
+                          "title": "How the OS Handles Restricted Operations",
+                          "content": "User programs use system calls. A system call is the safe way for a user program to ask the OS to do privileged work."
+                        },
+                        {
+                          "type": "code",
+                          "language": "c",
+                          "content": "read();\nopen();\nwrite();\nfork();\nexit();"
+                        },
+                        {
+                          "type": "callout",
+                          "title": "System call path",
+                          "content": "These look like normal C function calls, but inside the C library, they execute a special trap instruction."
+                        },
+                        {
+                          "type": "bullets",
+                          "items": [
+                            "The trap instruction saves enough program state to resume later.",
+                            "The trap instruction switches from user mode to kernel mode.",
+                            "The trap instruction jumps to the correct OS trap handler.",
+                            "After the OS finishes the privileged work, it uses return-from-trap to return to the user program."
+                          ]
+                        },
+                        {
+                          "type": "callout",
+                          "title": "Two Modes of Execution: User mode",
+                          "content": "Normal programs run in user mode. In user mode, a program cannot directly access hardware, execute privileged instructions, perform raw disk I/O, or modify OS memory."
+                        },
+                        {
+                          "type": "callout",
+                          "title": "User mode violation",
+                          "content": "If a user-mode program tries to perform restricted work directly, the hardware raises an exception and the OS may kill the process."
+                        },
+                        {
+                          "type": "callout",
+                          "title": "Two Modes of Execution: Kernel mode",
+                          "content": "The OS runs in kernel mode. In kernel mode, code has full access to machine resources and can execute privileged instructions."
+                        },
+                        {
+                          "type": "callout",
+                          "title": "Trap Table",
+                          "content": "The OS uses a trap table. The trap table tells the hardware: when a system call, interrupt, or exception happens, jump to this OS handler."
+                        },
+                        {
+                          "type": "bullets",
+                          "items": [
+                            "The trap table is initialized by the OS during boot time.",
+                            "User programs cannot choose where to jump inside the kernel.",
+                            "The OS controls the trap table.",
+                            "Setting the trap table is itself a privileged operation."
+                          ]
+                        },
+                        {
+                          "type": "callout",
+                          "title": "Cooperative vs Non-Cooperative Approach",
+                          "content": "The OS needs a reliable way to regain control of the CPU. Cooperative systems trust processes to give control back, while non-cooperative systems use hardware support to force control back."
+                        },
+                        {
+                          "type": "callout",
+                          "title": "Cooperative approach",
+                          "content": "The OS trusts processes to give up the CPU. A process gives control back to the OS when it makes a system call, calls yield, or causes an illegal operation like divide by zero or invalid memory access."
+                        },
+                        {
+                          "type": "callout",
+                          "title": "Cooperative approach problem",
+                          "content": "If a process enters an infinite loop and never makes a system call, the OS may never regain control. In old cooperative systems, the only solution might be rebooting."
+                        },
+                        {
+                          "type": "callout",
+                          "title": "Non-cooperative approach",
+                          "content": "The OS does not trust the process to give up the CPU. Instead, the OS uses hardware support to force control back. This is done with a timer interrupt."
+                        },
+                        {
+                          "type": "callout",
+                          "title": "Timer Interrupt",
+                          "content": "A timer interrupt is a hardware mechanism that interrupts the running process every few milliseconds."
+                        },
+                        {
+                          "type": "bullets",
+                          "items": [
+                            "When the timer fires, the running process is stopped.",
+                            "The hardware saves some of its state.",
+                            "The CPU switches to kernel mode.",
+                            "The OS timer interrupt handler runs.",
+                            "The OS decides whether to keep running the same process or switch to another one.",
+                            "This is how the OS prevents one process from monopolizing the CPU."
+                          ]
+                        },
+                        {
+                          "type": "callout",
+                          "title": "Why Disabling Timer Interrupts Can Be Useful",
+                          "content": "The timer interrupt is the main mechanism that lets the OS regain control. In some kernel contexts, the OS may temporarily disable interrupts."
+                        },
+                        {
+                          "type": "callout",
+                          "title": "Interrupts and critical sections",
+                          "content": "Disabling interrupts can be useful because it prevents the CPU from being interrupted during a critical section. For example, if the kernel is updating an important shared data structure, disabling interrupts can prevent another interrupt handler from running halfway through and causing inconsistent state."
+                        },
+                        {
+                          "type": "callout",
+                          "title": "Why overusing disabled interrupts is dangerous",
+                          "content": "Disabling interrupts is dangerous if overused: the OS may become unresponsive, timers and devices may not be handled, and on multiprocessor systems disabling interrupts on one CPU does not stop other CPUs. So it is only useful in limited, low-level kernel contexts."
+                        },
+                        {
+                          "type": "callout",
+                          "title": "How the OS Switches Between Processes",
+                          "content": "The OS switches processes through a context switch. A context switch means: save the state of the current process and restore the state of another process."
+                        },
+                        {
+                          "type": "bullets",
+                          "items": [
+                            "Process A is running.",
+                            "Timer interrupt occurs.",
+                            "Hardware saves A's user registers onto A's kernel stack.",
+                            "CPU switches to kernel mode.",
+                            "OS timer handler runs.",
+                            "Scheduler decides to run Process B.",
+                            "OS saves A's kernel context into A's process structure.",
+                            "OS restores B's kernel context from B's process structure.",
+                            "OS switches to B's kernel stack.",
+                            "OS executes return-from-trap.",
+                            "Hardware restores B's user registers.",
+                            "Process B resumes execution."
+                          ]
+                        },
+                        {
+                          "type": "callout",
+                          "title": "How Context Is Saved and Restored",
+                          "content": "There are two kinds of saving/restoring: hardware save/restore and OS software save/restore."
+                        },
+                        {
+                          "type": "callout",
+                          "title": "1. Hardware save/restore",
+                          "content": "When a trap or timer interrupt occurs, hardware saves user-level state, such as program counter, flags, and some registers. This is usually saved on the process's kernel stack."
+                        },
+                        {
+                          "type": "callout",
+                          "title": "2. OS software save/restore",
+                          "content": "When the OS decides to switch from Process A to Process B, it saves and restores kernel-level context, such as general-purpose registers, program counter, stack pointer, and kernel stack pointer. This is done by low-level assembly code, like the swtch() routine in xv6."
+                        },
+                        {
+                          "type": "callout",
+                          "title": "Scheduler",
+                          "content": "The scheduler is the part of the OS responsible for deciding which process runs next. It answers: should we continue running the current process, or switch to another process? The actual switching mechanism is the context switch. The policy decision is made by the scheduler."
+                        },
+                        {
+                          "type": "callout",
+                          "title": "Name of the Switching Process",
+                          "content": "The process of switching between two processes is called a context switch."
+                        },
+                        {
+                          "type": "callout",
+                          "title": "How Long Does a Context Switch Take?",
+                          "content": "A context switch is fast, but not free. It usually takes on the order of microseconds, depending on CPU architecture, operating system, cache effects, TLB effects, number of registers/state saved, and whether processes are on the same CPU core."
+                        },
+                        {
+                          "type": "callout",
+                          "title": "Context switch cost intuition",
+                          "content": "A context switch is much slower than a normal function call because the OS must enter kernel mode, save state, restore another state, and resume a different process."
+                        },
+                        {
+                          "type": "callout",
+                          "title": "sched_setaffinity on Linux",
+                          "content": "sched_setaffinity lets you restrict a process or thread to run only on specific CPU cores. Example idea: force two processes to run on the same CPU core."
+                        },
+                        {
+                          "type": "callout",
+                          "title": "Why CPU affinity helps measurement",
+                          "content": "This is useful when measuring context switch cost because it avoids confusing your measurement with process migration across cores."
+                        },
+                        {
+                          "type": "bullets",
+                          "items": [
+                            "If a process moves between cores, the measurement may include extra overhead from cache misses.",
+                            "If a process moves between cores, the measurement may include extra overhead from TLB misses.",
+                            "If a process moves between cores, the measurement may include extra overhead from different CPU core state.",
+                            "If a process moves between cores, the measurement may include extra overhead from migration costs.",
+                            "By pinning processes to one CPU, you get a cleaner measurement of the actual save-and-restore cost."
+                          ]
+                        },
+                        {
+                          "type": "callout",
+                          "title": "Key Takeaway",
+                          "content": "Limited direct execution works by combining direct CPU execution for speed, user mode and kernel mode for protection, system calls and traps for safe privileged operations, trap tables for controlled kernel entry, timer interrupts for non-cooperative CPU control, schedulers for deciding what runs next, and context switches for moving from one process to another. The OS stays in control while still letting user programs run efficiently."
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },

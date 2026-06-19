@@ -694,7 +694,8 @@ time {
 .readings-section-summary,
 .reading-subsection-summary,
 .reading-row,
-.note-group-summary {
+.note-group-summary,
+.note-section-summary {
   cursor: pointer;
   list-style: none;
 }
@@ -702,7 +703,8 @@ time {
 .readings-section-summary::-webkit-details-marker,
 .reading-subsection-summary::-webkit-details-marker,
 .reading-row::-webkit-details-marker,
-.note-group-summary::-webkit-details-marker {
+.note-group-summary::-webkit-details-marker,
+.note-section-summary::-webkit-details-marker {
   display: none;
 }
 
@@ -890,6 +892,22 @@ time {
 
 .note-group-summary {
   padding: .5rem 0;
+}
+
+.note-section {
+  border: 1px solid var(--line);
+  border-radius: .45rem;
+  padding: .75rem .85rem 0;
+  background: color-mix(in srgb, var(--panel) 35%, transparent);
+}
+
+.note-section-summary {
+  padding-bottom: .75rem;
+}
+
+.note-section[open] .note-section-summary {
+  border-bottom: 1px solid var(--line);
+  margin-bottom: .75rem;
 }
 
 .note-group-summary span {
