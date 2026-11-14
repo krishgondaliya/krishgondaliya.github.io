@@ -82,7 +82,7 @@ I would turn that preference into an experiment:
 
 **Decision.** Retain the additional agents only if the measured benefit is worth their complexity. If the multi-agent implementation wins a few tasks but substantially increases latency and cost, the decision is not automatic. Different applications may weigh these outcomes differently.
 
-Thirty tasks would be a useful exploratory comparison, not decisive evidence for a universal claim.[^sample] The experiment would still be valuable because it would replace an architectural intuition with concrete observations and a list of failure modes to investigate.
+Thirty tasks would be a useful exploratory comparison, not decisive evidence for a universal claim. The experiment would still be valuable because it would replace an architectural intuition with concrete observations and a list of failure modes to investigate.
 
 There is also a less obvious benefit: evaluation changes the questions one asks while building. Without tests, I may focus on whether the agents communicate elegantly. With tests, I have to ask whether communication helped complete the task. An appealing abstraction can survive indefinitely in a demo; it has a harder time surviving a comparison against a simpler baseline.
 
@@ -127,6 +127,3 @@ That standard is demanding precisely because it resists easy proxies. A project 
 The resulting philosophy is not "practice beats theory." It is that **theory becomes more valuable when it is connected to a problem, and practice becomes more valuable when its results are examined**. I would rather work through one system deeply enough to understand its failure modes than accumulate a dozen shallow demonstrations or a reading list I cannot translate into meaningful engineering decisions.
 
 ---
-
-
-[^sample]: Thirty tasks can reveal large differences and useful failure patterns, but conclusions will depend on task selection, run-to-run variability, and the budgets used. A serious comparative claim would require stronger evaluation design and replication.
