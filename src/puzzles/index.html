@@ -1,77 +1,32 @@
-<!doctype html>
-<html lang="en-us">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Puzzles | Krish Gondaliya</title>
-  <meta name="description" content="Puzzles">
-  <link rel="icon" type="image/png" href="/static/images/icon.png">
-  <link rel="apple-touch-icon" href="/static/images/icon.png">
-  <link rel="stylesheet" href="/css/live.css?v=page-backgrounds-1">
-  <script src="/scripts/theme-toggle.js"></script>
-</head>
-<body class="page-puzzles">
-  <header class="site-header">
-    <div class="shell header-inner">
-      <a class="brand" href="/" aria-label="Krish Gondaliya">
-        <pre class="brand-ascii" aria-hidden="true">██╗  ██╗██████╗ ██╗███████╗██╗  ██╗
-██║ ██╔╝██╔══██╗██║██╔════╝██║  ██║
-█████╔╝ ██████╔╝██║███████╗███████║
-██╔═██╗ ██╔══██╗██║╚════██║██╔══██║
-██║  ██╗██║  ██║██║███████║██║  ██║
-╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚══════╝╚═╝  ╚═╝
- ██████╗  ██████╗ ███╗   ██╗██████╗  █████╗ ██╗     ██╗██╗   ██╗ █████╗
-██╔════╝ ██╔═══██╗████╗  ██║██╔══██╗██╔══██╗██║     ██║╚██╗ ██╔╝██╔══██╗
-██║  ███╗██║   ██║██╔██╗ ██║██║  ██║███████║██║     ██║ ╚████╔╝ ███████║
-██║   ██║██║   ██║██║╚██╗██║██║  ██║██╔══██║██║     ██║  ╚██╔╝  ██╔══██║
-╚██████╔╝╚██████╔╝██║ ╚████║██████╔╝██║  ██║███████╗██║   ██║   ██║  ██║
- ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝   ╚═╝   ╚═╝  ╚═╝</pre>
-        <span class="brand-text">Krish Gondaliya</span>
-      </a>
-      <nav class="nav" aria-label="Primary navigation">
-        <a href="/">About</a>
-        <a href="/src/readings/">Readings</a>
-        <a href="/src/projects/">Projects</a>
-        <a class="active" href="/src/puzzles/">Puzzles</a>
-        <a href="/src/blogs/">Blogs</a>
-        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle color mode" title="Toggle color mode">
-          <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12Zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM11 1h2v3h-2V1Zm0 19h2v3h-2v-3ZM3.51 4.93l1.42-1.42 2.12 2.13-1.41 1.41-2.13-2.12Zm13.44 13.43 1.41-1.41 2.13 2.12-1.42 1.42-2.12-2.13ZM1 11h3v2H1v-2Zm19 0h3v2h-3v-2ZM3.51 19.07l2.13-2.12 1.41 1.41-2.12 2.13-1.42-1.42ZM16.95 5.64l2.12-2.13 1.42 1.42-2.13 2.12-1.41-1.41Z"/></svg>
-          <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21.64 13.64A9 9 0 0 1 10.36 2.36 9 9 0 1 0 21.64 13.64Z"/></svg>
-        </button>
-      </nav>
-    </div>
-  </header>
-  <div class="page shell">
-    <main>
-      <h1 class="page-title">Puzzles</h1>
-      <section class="puzzle-catalog" aria-label="Puzzle collections">
-        <details class="puzzle-platform">
-          <summary class="puzzle-platform-summary">
-            <span>🧩 Jane Street Puzzles</span>
-          </summary>
-          <div class="puzzle-platform-body">
-            <details class="puzzle-subsection">
-              <summary>May, 2026 - <a href="https://www.janestreet.com/puzzles/arch-madness-solution/" target="_blank" rel="noopener noreferrer">Arch Madness</a></summary>
-              <details class="puzzle-subsection puzzle-solution">
-                <summary>Solution Log</summary>
-                <p>The puzzle is built around placing quarter-circle arcs on a 9x9 grid to form connected regions, where each region's score equals its area, meaning cell count, multiplied by its piece count, meaning number of arcs. The goal is to satisfy row and column sum constraints, where each row and column sum is the total of scores from every region touching it. The final answer is the sum of all squared row sums plus all squared column sums.</p>
-                <p>My solution produced 12 regions, with the most structurally significant being Region 3, which had a score of 288 from area 18 and 16 pieces. This region spanned a large portion of the board and contributed its score to multiple rows and columns at once, so I treated it as the natural anchor for the configuration.</p>
-                <p>Rather than reasoning about arc placements purely by hand, I built a custom interactive visualizer in JavaScript. It performed live region detection with connected-component analysis on arc entry and exit pairs, recomputed all 12 region scores after every arc change, and displayed current row and column sums alongside the puzzle's hint targets in real time. The arc validity counter flagged geometrically illegal connections and acted as a constant sanity check during backtracking.</p>
-                <p>Once all 12 regions were valid and all hint constraints were satisfied, I verified the final answer manually. The row sums were 733, 197, 715, 779, 534, 1618, 592, 1052, and 851, giving a squared sum of 6,778,613. The column sums were 482, 281, 823, 1359, 1512, 775, 801, 548, and 490, giving 6,904,269. The combined final answer is 13,682,882.</p>
-              </details>
-            </details>
-            <details class="puzzle-subsection">
-              <summary>June, 2026 - <a href="https://www.janestreet.com/puzzles/regional-artwork-index/" target="_blank" rel="noopener noreferrer">Regional Artwork</a></summary>
-              <details class="puzzle-subsection puzzle-solution">
-                <summary>Solution Log</summary>
-                <p>Coming soon.</p>
-              </details>
-            </details>
+---
+layout: puzzles
+title: Puzzles
+description: Puzzle solution logs and notes.
+---
+<h1 class="page-title">Puzzles</h1>
+{% assign visible_puzzles = site.puzzles | where_exp: 'puzzle', 'puzzle.published != false' | where_exp: 'puzzle', 'puzzle.date <= site.time' | sort: 'date' | reverse %}
+{% assign puzzle_groups = visible_puzzles | group_by: 'platform' | sort: 'name' %}
+{% if visible_puzzles.size > 0 %}
+<div class="puzzle-collections">
+  {% for group in puzzle_groups %}
+  <section class="puzzle-group" aria-label="{{ group.name | escape }}">
+    <ul class="post-list blog-list puzzle-list">
+      {% for puzzle in group.items %}
+      <li>
+        <a class="post-link" href="{{ puzzle.url | relative_url }}">
+          <time datetime="{{ puzzle.date | date_to_xmlschema }}">{{ puzzle.date | date: "%b %Y" }}</time>
+          <div>
+            <h2>{{ puzzle.title | escape }}</h2>
+            <p class="summary">{{ puzzle.description | default: puzzle.excerpt | strip_html | normalize_whitespace | truncatewords: 35 | escape }}</p>
+            <span class="puzzle-read-link">Read solution log &rarr;</span>
           </div>
-        </details>
-      </section>
-    </main>
-    <footer class="footer"><span>Krish Gondaliya</span><span>&bull;</span><span>&copy; 2026</span></footer>
-  </div>
-</body>
-</html>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endfor %}
+</div>
+{% else %}
+<p class="tagline">No puzzles yet. Check back soon.</p>
+{% endif %}

@@ -1,0 +1,40 @@
+title: Krish Gondaliya
+description: Projects, notes, and writing by Krish Gondaliya.
+url: "https://www.krishgondaliya.com"
+baseurl: ""
+timezone: America/New_York
+encoding: utf-8
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+permalink: /src/blogs/:year/:month/:day/:title/
+future: false
+unpublished: false
+strict_front_matter: true
+collections:
+  puzzles:
+    output: true
+    permalink: /src/puzzles/:path/
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+  - scope:
+      path: ""
+      type: puzzles
+    values:
+      layout: puzzle
+      platform: Jane Street Puzzles
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
+  - node_modules
+  - .bundle
+  - .jekyll-cache
+  - .jekyll-metadata

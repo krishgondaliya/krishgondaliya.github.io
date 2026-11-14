@@ -1,0 +1,19 @@
+---
+layout: puzzles
+---
+<article class="blog-post puzzle-post">
+  <header class="post-header">
+    <a class="puzzle-back-link" href="{{ '/src/puzzles/' | relative_url }}">&larr; All puzzles</a>
+    <h1 class="page-title">{{ page.title | escape }}</h1>
+    <p class="post-meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %Y" }}</time>
+      <span class="post-tags">{{ page.platform | escape }}</span>
+    </p>
+    {% if page.description %}<p class="post-description">{{ page.description | escape }}</p>{% endif %}
+    {% if page.puzzle_url and page.puzzle_url != '' %}<p><a class="puzzle-source-link" href="{{ page.puzzle_url | escape }}" target="_blank" rel="noopener noreferrer">Original puzzle &nearr;</a></p>{% endif %}
+  </header>
+  <div class="post-content">
+    <h2>Solution Log</h2>
+    {{ content }}
+  </div>
+</article>

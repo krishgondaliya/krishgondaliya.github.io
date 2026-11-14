@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.title | escape }} | {{ site.title | escape }}</title>
+  <meta name="description" content="{{ page.description | default: page.excerpt | default: site.description | strip_html | normalize_whitespace | escape }}">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <link rel="icon" type="image/png" href="{{ '/static/images/icon.png' | relative_url }}">
+  <link rel="apple-touch-icon" href="{{ '/static/images/icon.png' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/css/live.css' | relative_url }}?v=page-backgrounds-1">
+  <link rel="stylesheet" href="{{ '/css/blog.css' | relative_url }}">
+  {% if layout.stylesheet %}<link rel="stylesheet" href="{{ layout.stylesheet | relative_url }}">{% endif %}
+  <script src="{{ '/scripts/theme-toggle.js' | relative_url }}"></script>
+</head>
+<body class="{{ layout.body_class | escape }}">
+  {% include site-header.html active_section=layout.active_section %}
+  <div class="page shell">
+    <main id="main-content">
+      {{ content }}
+    </main>
+    <footer class="footer"><span>{{ site.title | escape }}</span><span>&bull;</span><span>&copy; {{ site.time | date: '%Y' }}</span></footer>
+  </div>
+</body>
+</html>

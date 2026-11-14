@@ -1,0 +1,34 @@
+.puzzle-collections {
+  margin-top: 2rem;
+}
+
+.puzzle-group + .puzzle-group {
+  margin-top: 2.5rem;
+}
+
+.puzzle-list h2 {
+  margin: 0;
+  font-size: 1.35rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.puzzle-read-link {
+  display: inline-block;
+  margin-top: .75rem;
+  color: var(--accent);
+  font-size: .9rem;
+  font-weight: 650;
+}
+
+.puzzle-back-link,
+.puzzle-source-link {
+  color: var(--accent);
+}
+
+.puzzle-back-link:hover,
+.puzzle-source-link:hover {
+  color: var(--accent-strong);
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
